@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/colorPrimary"
+        android:background="@color/background"
+        >
+    </androidx.appcompat.widget.Toolbar>
 
    <androidx.viewpager2.widget.ViewPager2
        android:layout_width="match_parent"
@@ -15,12 +23,16 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
-        android:background="#F5F5F5"
+        android:background="#D6D6D6"
         >
 
     </View>
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabIconTint="@color/color_selector"
+        app:tabIndicatorHeight="0dp"
+        app:tabTextColor="@color/color_selector"
+        android:background="@color/background"
         android:id="@+id/tabLayout"/>
 </LinearLayout>

@@ -1,14 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.DiaryFragment">
+    tools:context=".Fragment.DiaryFragment"
+    android:orientation="vertical"
+    android:background="@color/background"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selamat malam, Najib !"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_20ssp"
+        android:textColor="@color/darkest_text"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Istirahat yang cukup ya"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:textStyle="bold"
+        android:textSize="@dimen/_20ssp"
+        android:textColor="@color/darkest_text"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:text="Mei 10, 2020"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/darkest_text"
+        android:background="@drawable/bg_circle"
+        />
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Diary" />
+        android:layout_marginTop="@dimen/_25sdp"
+        android:scrollIndicators="none"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:background="@drawable/bg_rounded_retangle"
+                android:elevation="@dimen/_5sdp"
+                android:id="@+id/rl_mood"
+                android:paddingHorizontal="@dimen/_25sdp"
+                >
+                <ImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/ic_edit"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/iv_edit"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_edit"
+                    android:layout_centerVertical="true"
+                    android:text="Hari ini terasa..."
+                    android:textColor="#ffff"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_20ssp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:background="@drawable/bg_rounded_retangle"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:id="@+id/rl_grate"
+                android:layout_below="@id/rl_mood"
+                android:paddingHorizontal="@dimen/_25sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                >
+                <ImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/ic_edit"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/iv_edit2"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_edit2"
+                    android:layout_centerVertical="true"
+                    android:text="Aku bersyukur"
+                    android:textColor="#ffff"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_20ssp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>
