@@ -30,12 +30,6 @@
         android:textColor="@color/darkest_text"
         android:background="@drawable/bg_circle"
         />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_listTarget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_100sdp"
@@ -57,6 +51,12 @@
             android:textColor="@color/aqua"
             />
     </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_listTarget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" ></androidx.recyclerview.widget.RecyclerView>
+
+
 
 
 
