@@ -3,12 +3,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".Fragment.StatistikFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Statistik"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:textStyle="bold"
+        android:id="@+id/tv_tittle"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_20ssp"
+        android:textColor="@color/darkest_text"
+        />
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:layout_marginTop="@dimen/_25sdp"
+        android:scrollIndicators="none"
+        android:layout_below="@+id/tv_tittle"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:elevation="@dimen/_5sdp"
+                android:id="@+id/rl_mood"
+                android:background="@drawable/bg_circle_white"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_25sdp"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_stat"
+                        android:text="Statistik"
+                        android:textColor="@color/icons"
+                        android:textSize="@dimen/_16ssp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mood kamu"
+                        android:textColor="@color/icons"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_20ssp"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:id="@+id/rl_grate"
+                android:layout_below="@id/rl_mood"
+                android:background="@drawable/bg_circle_white"
+                android:paddingHorizontal="@dimen/_25sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Statistik"
+                        android:textColor="@color/icons"
+                        android:textSize="@dimen/_16ssp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Harian kamu"
+                        android:layout_below="@id/tv_stat"
+                        android:textColor="@color/icons"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_20ssp"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.ListOtyFragment">
+    tools:context=".Fragment.DiaryFragment"
+    android:orientation="vertical"
+    android:background="@color/background"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Target yang ingin kamu capai di tahun"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_20ssp"
+        android:textColor="@color/darkest_text"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:text="2020"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/darkest_text"
+        android:background="@drawable/bg_circle"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_listTarget"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="List" />
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"/>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100sdp"
+        android:elevation="@dimen/_5sdp"
+        android:id="@+id/rl_mood"
+        android:background="@drawable/bg_circle_white"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_25sdp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/_40sdp"
+            android:textColor="@color/aqua"
+            />
+    </RelativeLayout>
+
+
+
+</LinearLayout>

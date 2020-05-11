@@ -10,6 +10,8 @@
     <color name="icons">#666666</color>
     <color name="darkest_text">#444444</color>
     <color name="light_text">#999999</color>
+    <color name="aqua">#2FAEDA</color>
+    <color name="aqua_light">#4DC2EB</color>
 
 
 </resources>
