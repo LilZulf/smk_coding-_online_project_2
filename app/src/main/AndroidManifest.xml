@@ -11,14 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GratefulHistory"></activity>
-        <activity android:name=".GreatefulHistory" />
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".GratefulHistory" />
         <activity android:name=".StatisticMood" />
         <activity android:name=".EditTarget" />
         <activity android:name=".AddTarget" />
         <activity android:name=".GratefulActivity" />
         <activity android:name=".MoodActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,20 +1,25 @@
 package com.github.lilzulf.masaya.Fragment
 
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.lilzulf.masaya.Adapter.TargetAdapter
+import com.github.lilzulf.masaya.AddTarget
 import com.github.lilzulf.masaya.Data.EndPoint
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.DataItem
 import com.github.lilzulf.masaya.Object.TargetResponse
 
 import com.github.lilzulf.masaya.R
+import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.dismissLoading
 import com.github.lilzulf.masaya.Util.showLoading
 import com.github.lilzulf.masaya.Util.tampilToast
@@ -28,6 +33,10 @@ import retrofit2.Response
  * A simple [Fragment] subclass.
  */
 class ListOtyFragment : Fragment() {
+    private var data: SharedPreferences? = null
+    companion object {
+        val REQUEST_CODE = 100
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,12 +45,18 @@ class ListOtyFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_list_oty, container, false)
     }override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        data = SharedPreferences(activity!!)
         getTransaksi()
+        rl_mood.setOnClickListener {
+//            val i = Intent(activity!!,AddTarget::class.java)
+//            startActivity(i)
+            navigasiAddTarget()
+        }
     }
     private fun getTransaksi() {
         showLoading(activity!!, swipeRefreshLayout)
         val TransaksiModel = ServiceRequest.get().doTarget(
-            "1"
+            data!!.getString("ID_USER").toString()
         )
         TransaksiModel.enqueue(object : Callback<TargetResponse> {
             override fun onFailure(call: Call<TargetResponse>, t: Throwable) {
@@ -68,6 +83,20 @@ class ListOtyFragment : Fragment() {
     private fun tampilGithubUser(githubUsers: List<DataItem>) {
         rv_listTarget.layoutManager = LinearLayoutManager(context)
         rv_listTarget.adapter = TargetAdapter(context!!, githubUsers) {
+        }
+    }
+    private fun navigasiAddTarget(){
+        val intent = Intent(activity!!, AddTarget::class.java)
+        startActivityForResult(intent, REQUEST_CODE)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data:
+    Intent?) {
+        if (requestCode == REQUEST_CODE){
+            if (resultCode == Activity.RESULT_OK) {
+                getTransaksi()
+            }else{
+                tampilToast(activity!!,"Tidak jadi")
+            }
         }
     }
 

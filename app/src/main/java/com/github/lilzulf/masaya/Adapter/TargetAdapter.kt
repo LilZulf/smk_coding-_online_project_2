@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.lilzulf.masaya.Object.DataItem
 import com.github.lilzulf.masaya.R
+import com.github.lilzulf.masaya.Util.tampilToast
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.target_item.*
 
@@ -28,6 +29,9 @@ List<DataItem>, private val listener: (DataItem)-> Unit) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bindItem(item: DataItem, listener: (DataItem) -> Unit) {
             txtTargetTittle.text = item.tittle
+            txtTargetTittle.setOnClickListener {
+                tampilToast(context,txtTargetTittle.text.toString())
+            }
         }
     }
 }

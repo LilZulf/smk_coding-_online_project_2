@@ -1,5 +1,6 @@
 package com.github.lilzulf.masaya.Data
 
+import com.github.lilzulf.masaya.Object.ResponseAuth
 import com.github.lilzulf.masaya.Object.TargetResponse
 import retrofit2.Call
 import retrofit2.http.Field
@@ -12,4 +13,17 @@ interface EndPoint {
     fun doTarget(
         @Field("idUser") id_user : String
     ): Call<TargetResponse>
+    @POST("auth/login")
+    @FormUrlEncoded
+    fun doLogin(
+        @Field("email") email : String,
+        @Field("pass") pass : String
+    ): Call<ResponseAuth>
+    @POST("feed/addtarget")
+    @FormUrlEncoded
+    fun addTarget(
+        @Field("tittle") tittle : String,
+        @Field("date") date:String,
+        @Field("idUser") id_user : String
+    ): Call<ResponseAuth>
 }
