@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ServiceRequest{
     private  var endpoint : EndPoint ? = null
 
-    private val BASE_URL = "http://192.168.43.238/api-skeleton/MasayaApi/"
+    private val BASE_URL = "https://kreasianakbululawang.000webhostapp.com/api/MasayaApi/"
 
     fun get(): EndPoint {
         if (endpoint == null){

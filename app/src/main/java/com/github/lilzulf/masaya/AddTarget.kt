@@ -36,9 +36,11 @@ class AddTarget : AppCompatActivity() {
         }
     }
     private fun addTarget(){
+        val intentData = intent.extras
+        val year = intentData!!.getString("year")
         var addAPI = ServiceRequest.get().addTarget(
             etTarget.text.toString(),
-            "2020",
+            year.toString(),
             data!!.getString("ID_USER").toString()
         )
 

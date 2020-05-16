@@ -1,11 +1,13 @@
 package com.github.lilzulf.masaya.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.lilzulf.masaya.EditTarget
 import com.github.lilzulf.masaya.Object.DataItem
 import com.github.lilzulf.masaya.R
 import com.github.lilzulf.masaya.Util.tampilToast
@@ -31,6 +33,8 @@ List<DataItem>, private val listener: (DataItem)-> Unit) :
             txtTargetTittle.text = item.tittle
             txtTargetTittle.setOnClickListener {
                 tampilToast(context,txtTargetTittle.text.toString())
+                val i = Intent(context,EditTarget::class.java)
+                context.startActivity(i)
             }
         }
     }

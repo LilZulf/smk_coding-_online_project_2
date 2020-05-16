@@ -4,20 +4,19 @@ package com.github.lilzulf.masaya.Fragment
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.NumberPicker.OnValueChangeListener
 import androidx.annotation.Nullable
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.lilzulf.masaya.Adapter.TargetAdapter
 import com.github.lilzulf.masaya.AddTarget
-import com.github.lilzulf.masaya.Data.EndPoint
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.DataItem
 import com.github.lilzulf.masaya.Object.TargetResponse
-
 import com.github.lilzulf.masaya.R
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.dismissLoading
@@ -28,6 +27,7 @@ import kotlinx.android.synthetic.main.fragment_list_oty.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 /**
  * A simple [Fragment] subclass.
@@ -47,16 +47,29 @@ class ListOtyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         data = SharedPreferences(activity!!)
         getTransaksi()
-        rl_mood.setOnClickListener {
+        rl_target.setOnClickListener {
 //            val i = Intent(activity!!,AddTarget::class.java)
 //            startActivity(i)
             navigasiAddTarget()
+        }
+        btYear.setOnClickListener {
+            rvPicker.visibility = View.VISIBLE
+            rv_listTarget.visibility = View.GONE
+            rl_target.visibility = View.GONE
+            btYear.isEnabled = false
+            setMinsPicker()
+        }
+        btOk.setOnClickListener {
+            rvPicker.visibility = View.GONE
+            rl_target.visibility = View.VISIBLE
+            getTransaksi()
         }
     }
     private fun getTransaksi() {
         showLoading(activity!!, swipeRefreshLayout)
         val TransaksiModel = ServiceRequest.get().doTarget(
-            data!!.getString("ID_USER").toString()
+            data!!.getString("ID_USER").toString(),
+            btYear.text.toString()
         )
         TransaksiModel.enqueue(object : Callback<TargetResponse> {
             override fun onFailure(call: Call<TargetResponse>, t: Throwable) {
@@ -69,6 +82,7 @@ class ListOtyFragment : Fragment() {
                 if (response.body()!!.code == 200) {
                     tampilToast(activity!!,response.body()!!.message!!)
                     tampilGithubUser(response.body()!!.data!!)
+
                 } else {
                    tampilToast(activity!!, response.body()!!.message!!)
                 }
@@ -87,6 +101,7 @@ class ListOtyFragment : Fragment() {
     }
     private fun navigasiAddTarget(){
         val intent = Intent(activity!!, AddTarget::class.java)
+        intent.putExtra("year",btYear.text.toString())
         startActivityForResult(intent, REQUEST_CODE)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data:
@@ -98,6 +113,23 @@ class ListOtyFragment : Fragment() {
                 tampilToast(activity!!,"Tidak jadi")
             }
         }
+    }
+
+    private fun setMinsPicker() {
+        val years = arrayOf("2020", "2021", "2022", "2023","2024","2025")
+
+        val ml = years.size
+        yearPicker.setMinValue(2020)
+        yearPicker.setMaxValue(2050)
+        yearPicker.setOnValueChangedListener(OnValueChangeListener { numberPicker, i, i1 ->
+            val valuePicker1: Int = yearPicker.getValue()
+            Log.d("picker value", valuePicker1.toString())
+            btYear.text = yearPicker.value.toString()
+            rv_listTarget.visibility = View.VISIBLE
+            rl_target.visibility = View.VISIBLE
+            btYear.isEnabled = true
+
+        })
     }
 
 }

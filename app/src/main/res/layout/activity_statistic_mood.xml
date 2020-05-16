@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".StatisticMood">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -21,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_close"
                 android:layout_centerVertical="true"
+                android:id="@+id/iv_close"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -44,8 +46,106 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="@dimen/_20sdp"
+                >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="@dimen/_14ssp"
+                   android:text="Total menyenangkan : "
+                   android:textColor="@color/darkest_text"
+                   />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total baik : "
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/darkest_text"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total biasa :"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/darkest_text"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total buruk :"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/darkest_text"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total menyedihkan :"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/darkest_text"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="@dimen/_20sdp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="menyenangkan"
+                    android:id="@+id/menyenangkan"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/darkest_text"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="baik"
+                    android:id="@+id/baik"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/darkest_text"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="biasa"
+                    android:id="@+id/biasa"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/darkest_text"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="buruk"
+                    android:id="@+id/buruk"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/darkest_text"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="menyedihkan"
+                    android:id="@+id/menyedihkan"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/darkest_text"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/ll_picker"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,81 +160,12 @@
                 android:text="Pilih bulan"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginVertical="@dimen/_20sdp"
-            >
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total luar biasa : "
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/luarBiasa"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total menyenangkan : "
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/menyenangkan"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total buruk : "
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/buruk"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total menyedihkan : "
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/menyedihkan"
-                    />
-            </LinearLayout>
-        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lobortis eleifend sollicitudin. Suspendisse potenti."
+            android:textSize="@dimen/_12ssp"
             />
     </LinearLayout>
 </RelativeLayout>

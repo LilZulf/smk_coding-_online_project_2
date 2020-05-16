@@ -7,7 +7,7 @@
     android:id="@+id/swipeRefreshLayout"
     android:background="@color/background"
     >
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -21,27 +21,31 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:textSize="@dimen/_20ssp"
             android:textColor="@color/darkest_text"
+            android:id="@+id/tv_tittle"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_10sdp"
             android:text="2020"
-            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/darkest_text"
             android:background="@drawable/bg_circle"
+            android:id="@+id/btYear"
+            android:layout_below="@id/tv_tittle"
             />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_100sdp"
             android:elevation="@dimen/_5sdp"
-            android:id="@+id/rl_mood"
+            android:id="@+id/rl_target"
             android:background="@drawable/bg_circle_white"
             android:paddingHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_25sdp"
+            android:layout_below="@id/btYear"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -57,9 +61,36 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_listTarget"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_target"
+            />
+        <RelativeLayout
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:elevation="@dimen/_10sdp"
+            android:padding="@dimen/_20sdp"
+            android:layout_centerInParent="true"
+            android:id="@+id/rvPicker"
+            android:visibility="gone"
+            >
+            <NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yearPicker"
+                android:layout_centerHorizontal="true"
+                android:descendantFocusability="blocksDescendants"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/yearPicker"
+                android:layout_centerHorizontal="true"
+                android:text="ok"
+                android:id="@+id/btOk"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
     <!-- TODO: Update blank fragment layout -->
 
 

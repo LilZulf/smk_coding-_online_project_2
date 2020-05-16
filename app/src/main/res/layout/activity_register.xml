@@ -36,51 +36,56 @@
             android:id="@+id/ll_formLogin"
             android:layout_below="@id/tv_tittle"
             >
+
             <EditText
+                android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_circle"
-                android:padding="@dimen/_20sdp"
                 android:hint="Nama lengkap"
                 android:inputType="text"
-                />
+                android:padding="@dimen/_20sdp" />
+
             <EditText
+                android:id="@+id/etNickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_circle"
-                android:padding="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/bg_circle"
                 android:hint="Nama panggilan"
                 android:inputType="text"
-                />
+                android:padding="@dimen/_20sdp" />
+
             <EditText
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:background="@drawable/bg_circle"
-                android:padding="@dimen/_20sdp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:layout_marginTop="@dimen/_15sdp"
-                />
+                android:padding="@dimen/_20sdp" />
+
             <EditText
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_circle"
-                android:padding="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/bg_circle"
                 android:hint="Password"
                 android:inputType="textPassword"
-                />
+                android:padding="@dimen/_20sdp" />
+
             <Button
+                android:id="@+id/btRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_circle"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:padding="@dimen/_20sdp"
+                android:background="@drawable/bg_circle"
                 android:backgroundTint="@color/colorPrimary"
+                android:padding="@dimen/_20sdp"
                 android:text="Daftar"
-                android:textColor="#ffffff"
-                />
+                android:textColor="#ffffff" />
         </LinearLayout>
     </RelativeLayout>
 
