@@ -1,6 +1,6 @@
 # smk_coding-_online_project_2
 ## Masaya
-Masaya adalah aplikasi jurnal harian yang dapat mencatat keseharian anda
+Masaya adalah aplikasi jurnal harian yang dapat mencatat keseharian anda.
 
 
 
