@@ -15,9 +15,12 @@ import androidx.fragment.app.Fragment
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.GratefulActivity
 import com.github.lilzulf.masaya.MoodActivity
+import com.github.lilzulf.masaya.Object.MoodDetail
 import com.github.lilzulf.masaya.Object.MoodResponse
 import com.github.lilzulf.masaya.R
 import com.github.lilzulf.masaya.Util.SharedPreferences
+import com.github.lilzulf.masaya.Util.dismissLoading
+import com.github.lilzulf.masaya.Util.showLoading
 import com.github.lilzulf.masaya.Util.tampilToast
 import kotlinx.android.synthetic.main.fragment_diary.*
 import retrofit2.Call
@@ -49,17 +52,19 @@ class DiaryFragment : Fragment() {
     }override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         data = SharedPreferences(activity!!)
+        llParent.visibility = View.GONE
         setGreetings()
-
-        rl_grate.setOnClickListener {
-          navigasiAddGrate()
-        }
-
         btDate.setOnClickListener {
            openDatePicker()
         }
         rl_mood2.setOnClickListener {
             tampilToast(activity!!,"Kamu sudah ceritakan hari ini")
+        }
+        rl_grate2.setOnClickListener {
+            navigasiAddGrate()
+        }
+        rl_grate1.setOnClickListener {
+            navigasiAddGrate()
         }
     }
     private fun openDatePicker(){
@@ -106,6 +111,7 @@ class DiaryFragment : Fragment() {
         getMood(currentDate)
     }
     private fun getMood(date : String?){
+        showLoading(activity!!, swipeRefreshLayout)
         var addAPI = ServiceRequest.get().getMood(
             date.toString(),
             data!!.getString("ID_USER").toString()
@@ -124,6 +130,7 @@ class DiaryFragment : Fragment() {
                     tvCardTitle2.text = "Hariku terasa"
                     tvCardDesc2.visibility = View.VISIBLE
                     tvCardDesc2.text = Mood[response.body()!!.data!!.state!!.toInt()]
+                    getGrate(date)
                 }
                 else{
                     tampilToast(activity!!,"Ayo ceritakan harimu !")
@@ -132,6 +139,39 @@ class DiaryFragment : Fragment() {
                     rl_mood_1.setOnClickListener {
                         navigasiAddMood()
                     }
+                    getGrate(date)
+                }
+
+            }
+
+        })
+    }
+    private fun getGrate(date : String?){
+        var addAPI = ServiceRequest.get().getGrateTotal(
+            data!!.getString("ID_USER").toString(),
+            date.toString()
+        )
+
+        addAPI.enqueue(object : Callback<MoodDetail> {
+            override fun onFailure(call: Call<MoodDetail>, t: Throwable) {
+                Toast.makeText(activity!!,t.message, Toast.LENGTH_LONG).show()
+                llParent.visibility = View.VISIBLE
+                dismissLoading(swipeRefreshLayout)
+            }
+
+            override fun onResponse(call: Call<MoodDetail>, response: Response<MoodDetail>) {
+                if(response.body()!!.data!!.total != "0"){
+                    rl_grate1.visibility = View.GONE
+                    rl_grate2.visibility = View.VISIBLE
+                    tv_edit3.text = response.body()!!.data!!.total.toString()
+                    llParent.visibility = View.VISIBLE
+                    dismissLoading(swipeRefreshLayout)
+                }
+                else{
+                    rl_grate2.visibility = View.GONE
+                    rl_grate1.visibility = View.VISIBLE
+                    llParent.visibility = View.VISIBLE
+                    dismissLoading(swipeRefreshLayout)
                 }
 
             }

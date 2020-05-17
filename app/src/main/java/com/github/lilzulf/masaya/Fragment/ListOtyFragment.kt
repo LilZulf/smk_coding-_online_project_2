@@ -56,12 +56,12 @@ class ListOtyFragment : Fragment() {
             rvPicker.visibility = View.VISIBLE
             rv_listTarget.visibility = View.GONE
             rl_target.visibility = View.GONE
-            btYear.isEnabled = false
             setMinsPicker()
         }
         btOk.setOnClickListener {
             rvPicker.visibility = View.GONE
             rl_target.visibility = View.VISIBLE
+            rv_listTarget.visibility = View.VISIBLE
             getTransaksi()
         }
     }
@@ -81,7 +81,7 @@ class ListOtyFragment : Fragment() {
                 dismissLoading(swipeRefreshLayout)
                 if (response.body()!!.code == 200) {
                     tampilToast(activity!!,response.body()!!.message!!)
-                    tampilGithubUser(response.body()!!.data!!)
+                    tampilTarget(response.body()!!.data!!)
 
                 } else {
                    tampilToast(activity!!, response.body()!!.message!!)
@@ -94,7 +94,7 @@ class ListOtyFragment : Fragment() {
         super.onDestroy()
         this.clearFindViewByIdCache()
     }
-    private fun tampilGithubUser(githubUsers: List<DataItem>) {
+    private fun tampilTarget(githubUsers: List<DataItem>) {
         rv_listTarget.layoutManager = LinearLayoutManager(context)
         rv_listTarget.adapter = TargetAdapter(context!!, githubUsers) {
         }
@@ -125,10 +125,7 @@ class ListOtyFragment : Fragment() {
             val valuePicker1: Int = yearPicker.getValue()
             Log.d("picker value", valuePicker1.toString())
             btYear.text = yearPicker.value.toString()
-            rv_listTarget.visibility = View.VISIBLE
-            rl_target.visibility = View.VISIBLE
             btYear.isEnabled = true
-
         })
     }
 

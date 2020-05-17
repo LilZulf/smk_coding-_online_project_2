@@ -58,4 +58,21 @@ interface EndPoint {
         @Field("text") text:String,
         @Field("date") date:String
     ):Call<ResponseGrate>
+    @POST("feed/getgratetotal")
+    @FormUrlEncoded
+    fun getGrateTotal(
+        @Field("idUser") id_user : String,
+        @Field("date") date:String
+    ):Call<MoodDetail>
+    @POST("feed/getgratebydate")
+    @FormUrlEncoded
+    fun getGrateByDate(
+        @Field("idUser") id_user : String,
+        @Field("date") date:String
+    ):Call<ResponseGrateList>
+    @POST("feed/getgrate")
+    @FormUrlEncoded
+    fun getGrate(
+        @Field("idUser") id_user : String
+    ):Call<ResponseGrateList>
 }

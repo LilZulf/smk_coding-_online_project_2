@@ -12,8 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="nosensor"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="nosensor" />
         <activity android:name=".GratefulHistory" />
         <activity android:name=".StatisticMood" />
         <activity android:name=".EditTarget" />

@@ -1,234 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.DiaryFragment"
     android:background="@color/background"
+    android:id="@+id/swipeRefreshLayout"
     >
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selamat malam, Najib !"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:textSize="@dimen/_20ssp"
-            android:textColor="@color/darkest_text"
-            android:id="@+id/tvGreeting"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Istirahat yang cukup ya"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:textStyle="bold"
-            android:textSize="@dimen/_20ssp"
-            android:textColor="@color/darkest_text"
-            android:id="@+id/tvGreeting2"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:text="Mei 10, 2020"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/darkest_text"
-            android:background="@drawable/bg_circle"
-            android:id="@+id/btDate"
-            />
-        <RelativeLayout
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginVertical="@dimen/_15sdp"
+            android:id="@+id/llParent"
             >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selamat malam, Najib !"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textSize="@dimen/_20ssp"
+                android:textColor="@color/darkest_text"
+                android:id="@+id/tvGreeting"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Istirahat yang cukup ya"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:textStyle="bold"
+                android:textSize="@dimen/_20ssp"
+                android:textColor="@color/darkest_text"
+                android:id="@+id/tvGreeting2"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:text="Mei 10, 2020"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/darkest_text"
+                android:background="@drawable/bg_circle"
+                android:id="@+id/btDate"
+                />
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:background="@drawable/bg_rounded_retangle"
-                android:elevation="@dimen/_5sdp"
-                android:id="@+id/rl_mood"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="@dimen/_15sdp"
                 >
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="@dimen/_25sdp"
-                    android:id="@+id/rl_mood_1"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:background="@drawable/bg_rounded_retangle"
+                    android:elevation="@dimen/_5sdp"
+                    android:id="@+id/rl_mood"
                     >
-                    <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:src="@drawable/ic_edit"
-                        android:layout_centerVertical="true"
-                        android:id="@+id/iv_edit"
-                        />
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_toRightOf="@id/iv_edit"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_25sdp"
+                        android:id="@+id/rl_mood_1"
                         >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hari ini terasa..."
-                            android:textColor="#ffff"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/_20ssp"
-                            android:id="@+id/tvCardTitle"
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:src="@drawable/ic_edit"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/iv_edit"
                             />
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="menyenangkan"
-                            android:textColor="#ffff"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/_20ssp"
-                            android:id="@+id/tvCardDesc"
-                            android:visibility="gone"
-                            />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:layout_toRightOf="@id/iv_edit"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hari ini terasa..."
+                                android:textColor="#ffff"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_20ssp"
+                                android:id="@+id/tvCardTitle"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="menyenangkan"
+                                android:textColor="#ffff"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_20ssp"
+                                android:id="@+id/tvCardDesc"
+                                android:visibility="gone"
+                                />
+                        </LinearLayout>
 
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="@dimen/_25sdp"
-                    android:id="@+id/rl_mood2"
-                    android:visibility="gone"
-                    >
-                    <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:src="@drawable/ic_edit"
-                        android:layout_centerVertical="true"
-                        android:id="@+id/iv_edit2_"
-                        />
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_toRightOf="@id/iv_edit2_"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_25sdp"
+                        android:id="@+id/rl_mood2"
+                        android:visibility="gone"
                         >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hari ini terasa baru..."
-                            android:textColor="#ffff"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/_20ssp"
-                            android:id="@+id/tvCardTitle2"
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:src="@drawable/ic_edit"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/iv_edit2_"
                             />
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="menyenangkan"
-                            android:textColor="#ffff"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/_20ssp"
-                            android:id="@+id/tvCardDesc2"
-                            android:visibility="gone"
-                            />
-                    </LinearLayout>
-                </RelativeLayout>
+                            android:orientation="vertical"
+                            android:layout_toRightOf="@id/iv_edit2_"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hari ini terasa baru..."
+                                android:textColor="#ffff"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_20ssp"
+                                android:id="@+id/tvCardTitle2"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="menyenangkan"
+                                android:textColor="#ffff"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_20ssp"
+                                android:id="@+id/tvCardDesc2"
+                                android:visibility="gone"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
 
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
-                android:background="@drawable/bg_rounded_retangle"
-                android:elevation="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:id="@+id/rl_grate"
-                android:layout_below="@id/rl_mood"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_7sdp"
-                >
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="@dimen/_25sdp"
-                    android:id="@+id/rl_grate1"
-
-                    >
-                    <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:src="@drawable/ic_edit"
-                        android:layout_centerVertical="true"
-                        android:id="@+id/iv_edit2"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/iv_edit2"
-                        android:layout_centerVertical="true"
-                        android:text="Aku bersyukur"
-                        android:textColor="#ffff"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_20ssp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        />
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="@dimen/_25sdp"
-                    android:id="@+id/rl_grate2"
-                    android:visibility="gone"
+                    android:layout_height="@dimen/_100sdp"
+                    android:background="@drawable/bg_rounded_retangle"
+                    android:elevation="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:id="@+id/rl_grate"
+                    android:layout_below="@id/rl_mood"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
                     >
-                    <TextView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="wrap_content"
-                        android:text="3"
-                        android:layout_centerVertical="true"
-                        android:id="@+id/tv_edit3"
-                        android:textColor="#ffffff"
-                        android:textSize="@dimen/_40ssp"
-                        />
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_toRightOf="@id/tv_edit3"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/_10sdp"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_25sdp"
+                        android:id="@+id/rl_grate1"
+                        android:visibility="visible"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:src="@drawable/ic_edit"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/iv_edit2"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/iv_edit2"
+                            android:layout_centerVertical="true"
+                            android:text="Aku bersyukur"
+                            android:textColor="#ffff"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_20ssp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_25sdp"
+                        android:id="@+id/rl_grate2"
+                        android:visibility="gone"
                         >
                         <TextView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/tv_edit3"
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/_40ssp"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            />
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Hal"
-                            android:textColor="#ffff"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/_20ssp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Yang disyukuri"
-                            android:textColor="#ffff"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/_20ssp"
-                            />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:layout_toRightOf="@id/tv_edit3"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hal"
+                                android:textColor="#ffff"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_20ssp"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yang disyukuri"
+                                android:textColor="#ffff"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_20ssp"
+                                />
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
-
             </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <!-- TODO: Update blank fragment layout -->
 
 
-</ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

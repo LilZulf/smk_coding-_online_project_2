@@ -100,7 +100,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Harian kamu"
+                        android:text="Bersyukur kamu"
                         android:layout_below="@id/tv_stat"
                         android:textColor="@color/icons"
                         android:textStyle="bold"

@@ -1,25 +1,22 @@
 package com.github.lilzulf.masaya.Adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.github.lilzulf.masaya.EditTarget
-import com.github.lilzulf.masaya.Object.DataItem
+import com.github.lilzulf.masaya.Object.DataGrate
 import com.github.lilzulf.masaya.R
-import com.github.lilzulf.masaya.Util.tampilToast
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.grate_item1.*
 import kotlinx.android.synthetic.main.target_item.*
 
-class TargetAdapter(private val context: Context, private val items:
-List<DataItem>, private val listener: (DataItem)-> Unit) :
-    RecyclerView.Adapter<TargetAdapter.ViewHolder>() {
+class GrateAdapeter1(private val context: Context, private val items:
+List<DataGrate>, private val listener: (DataGrate)-> Unit) :
+    RecyclerView.Adapter<GrateAdapeter1.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(context, LayoutInflater.from(context).inflate(
-            R.layout.target_item,
+            R.layout.grate_item1,
             parent, false))
     override fun getItemCount(): Int {
         return items.size
@@ -29,13 +26,8 @@ List<DataItem>, private val listener: (DataItem)-> Unit) :
     }
     class ViewHolder(val context: Context, override val containerView : View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bindItem(item: DataItem, listener: (DataItem) -> Unit) {
-            txtTargetTittle.text = item.tittle
-            rlItem.setOnClickListener {
-                tampilToast(context,txtTargetTittle.text.toString())
-//                val i = Intent(context,EditTarget::class.java)
-//                context.startActivity(i)
-            }
+        fun bindItem(item: DataGrate, listener: (DataGrate) -> Unit) {
+           txtGrateTittle.text = item.text.toString()
         }
     }
 }

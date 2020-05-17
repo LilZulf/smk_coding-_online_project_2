@@ -4,9 +4,13 @@ import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.lilzulf.masaya.Adapter.GrateAdapeter1
 import com.github.lilzulf.masaya.Data.ServiceRequest
+import com.github.lilzulf.masaya.Object.DataGrate
 import com.github.lilzulf.masaya.Object.ResponseAuth
 import com.github.lilzulf.masaya.Object.ResponseGrate
+import com.github.lilzulf.masaya.Object.ResponseGrateList
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.tampilToast
 import kotlinx.android.synthetic.main.activity_grateful.*
@@ -20,6 +24,7 @@ class GratefulActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grateful)
         data = SharedPreferences(applicationContext!!)
+        getGrate()
         btSand.setOnClickListener {
             insertHandler()
         }
@@ -77,25 +82,31 @@ class GratefulActivity : AppCompatActivity() {
 
         })
     }
-    private fun recursive(isEnd : Boolean = false){
-        val op1  = etOptional1.text.toString()
-        val op2 = etOptioanl2.text.toString()
+    private fun getGrate(){
+        val intentData = intent.extras
+        val date = intentData!!.getString("date")
+        var addAPI = ServiceRequest.get().getGrateByDate(
+            data!!.getString("ID_USER").toString(),
+            date.toString()
+        )
 
-        etMain.text.clear()
+        addAPI.enqueue(object : Callback<ResponseGrateList> {
+            override fun onFailure(call: Call<ResponseGrateList>, t: Throwable) {
+                Toast.makeText(applicationContext,t.message, Toast.LENGTH_LONG).show()
+            }
 
-        if(op1.isNotEmpty()){
-            doInsert(op1,true)
-        }
-        if(op2.isNotEmpty()){
-            doInsert(op2,false)
-        }
-        if(isEnd == true){
-            setResult(Activity.RESULT_OK)
-            finish()
-        }
-        else{
-            setResult(Activity.RESULT_OK)
-            finish()
+            override fun onResponse(call: Call<ResponseGrateList>, response: Response<ResponseGrateList>) {
+                if(response.body()!!.code == 200){
+                    tampilGrate(response.body()!!.data!!)
+                }
+
+            }
+
+        })
+    }
+    private fun tampilGrate(githubUsers: List<DataGrate>) {
+        rcGrate.layoutManager = LinearLayoutManager(applicationContext)
+        rcGrate.adapter = GrateAdapeter1(applicationContext, githubUsers) {
         }
     }
 }
