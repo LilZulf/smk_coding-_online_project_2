@@ -89,24 +89,24 @@ class DiaryFragment : Fragment() {
         val timeOfDay: Int = c.get(Calendar.HOUR_OF_DAY)
         val sdf = SimpleDateFormat("dd/M/yyyy")
         val currentDate = sdf.format(Date())
-        btDate.text = currentDate.toString()
 
+        btDate.text = currentDate.toString()
         if (timeOfDay >= 0 && timeOfDay < 12) {
             Toast.makeText(activity!!, "Selamat Pagi", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat pagi, "+data!!.getString("NICKNAME")
-            tvGreeting2.text = "Tuliskan dalam hatimu bahwa setiap hari adalah hari terbaik dalam setahun."
+            tvGreeting.text = "Selamat pagi, "+data!!.getString("NICKNAME")+"\n"+getString(R.string.moring)
+//            tvGreeting2.text = "Tuliskan dalam hatimu bahwa setiap hari adalah hari terbaik dalam setahun."
         } else if (timeOfDay >= 12 && timeOfDay < 16) {
             Toast.makeText(activity!!, "Selamat Siang", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat siang, "+data!!.getString("NICKNAME")
-            tvGreeting2.text = "Jalani harimu dengan berkah dan cinta."
+            tvGreeting.text = "Selamat siang, "+data!!.getString("NICKNAME")+"\n"+getString(R.string.noon)
+//            tvGreeting2.text = "Jalani harimu dengan berkah dan cinta."
         } else if (timeOfDay >= 16 && timeOfDay < 21) {
             Toast.makeText(activity!!, "Selamat Sore", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat sore, "+data!!.getString("NICKNAME")
-            tvGreeting2.text = "Ada yang tak tenggelam ketika senja datang, yakni Rasa."
+            tvGreeting.text = "Selamat sore, "+data!!.getString("NICKNAME")+"\n"+getString(R.string.evening)
+//            tvGreeting2.text = "Ada yang tak tenggelam ketika senja datang, yakni Rasa."
         } else if (timeOfDay >= 21 && timeOfDay < 24) {
             Toast.makeText(activity!!, "Selamat malam", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat malam, "+data!!.getString("NICKNAME")
-            tvGreeting2.text = "Waktunya padamkan bara setelah lelah bekerja."
+            tvGreeting.text = "Selamat malam, "+data!!.getString("NICKNAME")+"\n"+getString(R.string.night)
+//            tvGreeting2.text = "Waktunya padamkan bara setelah lelah bekerja."
         }
         getMood(currentDate)
     }
@@ -123,7 +123,7 @@ class DiaryFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<MoodResponse>, response: Response<MoodResponse>) {
-                if(response.body()!!.code == 200){
+                if(response.body()?.code == 200){
                     rl_mood2.visibility = View.VISIBLE
                     rl_mood_1.visibility = View.GONE
                     iv_edit2_.setImageResource(iconsMood[response.body()!!.data!!.state!!.toInt()])
@@ -141,7 +141,7 @@ class DiaryFragment : Fragment() {
                     }
                     getGrate(date)
                 }
-
+               
             }
 
         })

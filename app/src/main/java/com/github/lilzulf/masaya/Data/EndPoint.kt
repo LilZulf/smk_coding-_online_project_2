@@ -7,6 +7,10 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface EndPoint {
+    @POST("dummy/test")
+    @FormUrlEncoded
+    fun test( @Field("params") params: String
+    ): Call<Test>
     @POST("feed/gettarget")
     @FormUrlEncoded
     fun doTarget(

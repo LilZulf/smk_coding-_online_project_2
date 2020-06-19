@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="moring">Tuliskan dalam hatimu bahwa setiap hari adalah hari terbaik dalam setahun.</string>
+    <string name="noon">Jalani harimu dengan berkah dan cinta.</string>
+    <string name="evening">Ada yang tak tenggelam ketika senja datang, yakni Rasa.</string>
+    <string name="night">Waktunya padamkan bara setelah lelah bekerja.</string>
 </resources>

@@ -166,6 +166,7 @@
             android:layout_height="wrap_content"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lobortis eleifend sollicitudin. Suspendisse potenti."
             android:textSize="@dimen/_12ssp"
+            android:visibility="gone"
             />
     </LinearLayout>
 </RelativeLayout>
