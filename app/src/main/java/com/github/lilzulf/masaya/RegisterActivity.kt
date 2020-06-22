@@ -3,11 +3,13 @@ package com.github.lilzulf.masaya
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.ResponseAuth
 import com.github.lilzulf.masaya.Util.SharedPreferences
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,9 +17,11 @@ import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
     private var data : SharedPreferences? = null
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        auth = FirebaseAuth.getInstance()
         data = SharedPreferences(applicationContext)
         iv_close.setOnClickListener {
             finish()
@@ -55,7 +59,8 @@ class RegisterActivity : AppCompatActivity() {
             etPassword.requestFocus()
         }
         else {
-            doRegister()
+           // doRegister()
+            doRegisterFirebase(email,pass)
         }
     }
     private fun doRegister(){
@@ -85,5 +90,28 @@ class RegisterActivity : AppCompatActivity() {
             }
 
         })
+    }
+    private fun doRegisterFirebase(email : String,password : String){
+        auth!!.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("Kenek", "createUserWithEmail:success")
+//                    val user = auth.currentUser
+//                    updateUI(user)
+                    Toast.makeText(applicationContext,"Berhasil daftar", Toast.LENGTH_SHORT).show()
+                    val i = Intent(this@RegisterActivity,TestActivity::class.java)
+                    startActivity(i)
+                    finish()
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("Error :", "createUserWithEmail:failure", task.exception)
+//                    Toast.makeText(baseContext, "Authentication failed.",
+//                        Toast.LENGTH_SHORT).show()
+//                    updateUI(null)
+                }
+
+            }
+
     }
 }

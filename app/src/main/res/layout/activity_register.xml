@@ -44,6 +44,7 @@
                 android:background="@drawable/bg_circle"
                 android:hint="Nama lengkap"
                 android:inputType="text"
+                android:visibility="gone"
                 android:padding="@dimen/_20sdp" />
 
             <EditText
@@ -54,6 +55,7 @@
                 android:background="@drawable/bg_circle"
                 android:hint="Nama panggilan"
                 android:inputType="text"
+                android:visibility="gone"
                 android:padding="@dimen/_20sdp" />
 
             <EditText
