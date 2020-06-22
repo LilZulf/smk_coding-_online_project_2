@@ -12,5 +12,21 @@
         android:layout_centerInParent="true"
         android:text="edadw"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvEmail"
+        android:layout_below="@+id/tvUsername"
+        android:text="edadw"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvToken"
+        android:layout_below="@+id/tvEmail"
+        android:text="edadw"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>
