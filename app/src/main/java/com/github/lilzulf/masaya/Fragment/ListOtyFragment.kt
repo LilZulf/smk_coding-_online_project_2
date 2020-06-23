@@ -9,19 +9,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker.OnValueChangeListener
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.lilzulf.masaya.Adapter.TargetAdapter
+import com.github.lilzulf.masaya.Adapter.TargetAdapter2
 import com.github.lilzulf.masaya.AddTarget
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.DataItem
+import com.github.lilzulf.masaya.Object.MyTargetModel
 import com.github.lilzulf.masaya.Object.TargetResponse
 import com.github.lilzulf.masaya.R
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.dismissLoading
 import com.github.lilzulf.masaya.Util.showLoading
 import com.github.lilzulf.masaya.Util.tampilToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_list_oty.*
 import retrofit2.Call
@@ -34,6 +41,9 @@ import retrofit2.Response
  */
 class ListOtyFragment : Fragment() {
     private var data: SharedPreferences? = null
+    lateinit var ref : DatabaseReference
+    lateinit var auth : FirebaseAuth
+    lateinit var dataTarget : ArrayList<MyTargetModel>
     companion object {
         val REQUEST_CODE = 100
     }
@@ -46,7 +56,8 @@ class ListOtyFragment : Fragment() {
     }override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         data = SharedPreferences(activity!!)
-        getTransaksi()
+        //getTransaksi()+++++
+        getData()
         rl_target.setOnClickListener {
 //            val i = Intent(activity!!,AddTarget::class.java)
 //            startActivity(i)
@@ -62,7 +73,7 @@ class ListOtyFragment : Fragment() {
             rvPicker.visibility = View.GONE
             rl_target.visibility = View.VISIBLE
             rv_listTarget.visibility = View.VISIBLE
-            getTransaksi()
+            getData()
         }
     }
     private fun getTransaksi() {
@@ -108,7 +119,7 @@ class ListOtyFragment : Fragment() {
     Intent?) {
         if (requestCode == REQUEST_CODE){
             if (resultCode == Activity.RESULT_OK) {
-                getTransaksi()
+                //getTransaksi()
             }else{
                 tampilToast(activity!!,"Tidak jadi")
             }
@@ -127,6 +138,50 @@ class ListOtyFragment : Fragment() {
             btYear.text = yearPicker.value.toString()
             btYear.isEnabled = true
         })
+    }
+    private fun getData() {
+        //Mendapatkan Referensi Database
+        val year = btYear.text.toString()
+        Toast.makeText(getContext(), "Mohon Tunggu Sebentar..." ,
+            Toast. LENGTH_LONG ).show()
+        auth = FirebaseAuth.getInstance()
+        val getUserID: String = auth.getCurrentUser()?.getUid(). toString ()
+        ref = FirebaseDatabase.getInstance().getReference()
+        ref
+            .child(getUserID)
+            .child( "Target" )
+            .orderByChild("date")
+            .equalTo(year)
+            .addValueEventListener( object :
+            ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Toast.makeText(getContext(), "Database Error yaa..." ,
+                    Toast. LENGTH_LONG ).show()
+            }
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                //Inisialisasi ArrayList
+                dataTarget = java.util.ArrayList<MyTargetModel>()
+                for (snapshot in dataSnapshot. children ) {
+                    //Mapping data pada DataSnapshot ke dalam objek mahasiswa
+                    val target = snapshot.getValue(MyTargetModel:: class . java )
+                    //Mengambil Primary Key, digunakan untuk proses Update dan
+                    target?.key = snapshot.key.toString()
+                    dataTarget.add(target!!)
+                }
+                //Memasang Adapter pada RecyclerView
+//                rv_listTarget. layoutManager = LinearLayoutManager( context )
+//                rv_listTarget. adapter = TargetAdapter2( context!!, dataTarget)
+                rv_listTarget.layoutManager = LinearLayoutManager(context)
+                rv_listTarget.adapter = TargetAdapter2(context!!, dataTarget) {
+                }
+                Toast.makeText(getContext(), "Data Berhasil Dimuat" ,
+                    Toast. LENGTH_LONG ).show()
+            }
+        })
+    }
+    private fun getDataQuery(){
+        val year = btYear.text.toString()
+        var ref = Firebase.database.getReference("Target")
     }
 
 }

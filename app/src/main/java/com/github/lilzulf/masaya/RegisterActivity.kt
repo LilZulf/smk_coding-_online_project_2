@@ -100,7 +100,7 @@ class RegisterActivity : AppCompatActivity() {
 //                    val user = auth.currentUser
 //                    updateUI(user)
                     Toast.makeText(applicationContext,"Berhasil daftar", Toast.LENGTH_SHORT).show()
-                    val i = Intent(this@RegisterActivity,TestActivity::class.java)
+                    val i = Intent(this@RegisterActivity,MainActivity::class.java)
                     startActivity(i)
                     finish()
                 } else {

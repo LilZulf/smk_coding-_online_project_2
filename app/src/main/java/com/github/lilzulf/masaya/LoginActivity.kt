@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
@@ -32,8 +33,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         if ( auth !!. currentUser == null ) {
         } else {
             //Jika sudah login langsung dilempar ke MainActivity
-            intent = Intent( applicationContext ,
-                TestActivity:: class . java )
+            intent = Intent( applicationContext , MainActivity:: class . java )
             startActivity( intent )
             finish()
         }
@@ -65,7 +65,8 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
             etPassword.requestFocus()
         }
         else {
-            doLogin()
+            //doLogin()
+            doLoginFirebase()
         }
     }
     private fun doLogin(){
@@ -102,6 +103,29 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         startActivity(i)
         finish()
     }
+    private fun doLoginFirebase(){
+        val email =   etEmail.text.toString()
+        val password = etPassword.text.toString()
+        auth!!.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("Log : ", "signInWithEmail:success")
+                    //val user = auth.currentUser
+                    //updateUI(user)
+                    toMain()
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("Error : ", "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                   // updateUI(null)
+                    // ...
+                }
+
+                // ...
+            }
+    }
 
     override fun onActivityResult(
         requestCode: Int,
@@ -116,7 +140,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                 Toast.makeText( this , "Login Berhasil" ,
                     Toast. LENGTH_SHORT ).show()
                 intent = Intent( applicationContext ,
-                    TestActivity:: class . java )
+                    MainActivity:: class . java )
                 startActivity( intent )
                 finish()
             } else { //Jika gagal login

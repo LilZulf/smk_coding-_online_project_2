@@ -23,7 +23,8 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         data = SharedPreferences(applicationContext!!)
-        doLogin()
+        //doLogin()
+        intentTo()
     }
     private fun doLogin(){
         var registAPI = ServiceRequest.get().test(

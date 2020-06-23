@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.github.lilzulf.masaya.Data.ServiceRequest
+import com.github.lilzulf.masaya.Object.MyTargetModel
 import com.github.lilzulf.masaya.Object.ResponseAuth
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.tampilToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_target.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,11 +19,15 @@ import retrofit2.Response
 
 class AddTarget : AppCompatActivity() {
     private var data : SharedPreferences? = null
+    lateinit var ref : DatabaseReference
+    private var auth : FirebaseAuth? = null
     private val date = "2020"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_target)
         data = SharedPreferences(applicationContext!!)
+        ref = FirebaseDatabase.getInstance().getReference()
+        auth = FirebaseAuth.getInstance()
         iv_close.setOnClickListener {
             setResult(Activity.RESULT_CANCELED)
             finish()
@@ -31,7 +39,8 @@ class AddTarget : AppCompatActivity() {
                 etTarget.error = "Harap isi target anda"
                 etTarget.requestFocus()
             }else{
-                addTarget()
+                //addTarget()
+                addTargetFirebase()
             }
         }
     }
@@ -66,5 +75,20 @@ class AddTarget : AppCompatActivity() {
             }
 
         })
+    }
+    private fun addTargetFirebase(){
+        val intentData = intent.extras
+        val year = intentData!!.getString("year").toString()
+        val title = etTarget.text.toString()
+        val user_id = auth!!.currentUser!!.uid.toString()
+
+        val target = MyTargetModel(title, year,null)
+        ref .child(user_id).child( "Target" ).push().setValue(target).addOnCompleteListener {
+            Toast.makeText( this , "Data Berhasil Disimpan" ,
+                Toast. LENGTH_SHORT ).show()
+        }
+        setResult(Activity.RESULT_OK)
+        finish()
+
     }
 }

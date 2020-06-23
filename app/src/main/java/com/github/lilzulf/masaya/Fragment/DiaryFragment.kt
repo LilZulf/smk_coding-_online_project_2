@@ -93,22 +93,22 @@ class DiaryFragment : Fragment() {
         btDate.text = currentDate.toString()
         if (timeOfDay >= 0 && timeOfDay < 12) {
             Toast.makeText(activity!!, "Selamat Pagi", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat pagi, "+data!!.getString("NICKNAME")+"\n"+getString(R.string.moring)
+            tvGreeting.text = "Selamat pagi, "+"\n"+getString(R.string.moring)
 //            tvGreeting2.text = "Tuliskan dalam hatimu bahwa setiap hari adalah hari terbaik dalam setahun."
         } else if (timeOfDay >= 12 && timeOfDay < 16) {
             Toast.makeText(activity!!, "Selamat Siang", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat siang, "+data!!.getString("NICKNAME")+"\n"+getString(R.string.noon)
+            tvGreeting.text = "Selamat siang, "+"\n"+getString(R.string.noon)
 //            tvGreeting2.text = "Jalani harimu dengan berkah dan cinta."
         } else if (timeOfDay >= 16 && timeOfDay < 21) {
             Toast.makeText(activity!!, "Selamat Sore", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat sore, "+data!!.getString("NICKNAME")+"\n"+getString(R.string.evening)
+            tvGreeting.text = "Selamat sore, "+"\n"+getString(R.string.evening)
 //            tvGreeting2.text = "Ada yang tak tenggelam ketika senja datang, yakni Rasa."
         } else if (timeOfDay >= 21 && timeOfDay < 24) {
             Toast.makeText(activity!!, "Selamat malam", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat malam, "+data!!.getString("NICKNAME")+"\n"+getString(R.string.night)
+            tvGreeting.text = "Selamat malam, "+"\n"+getString(R.string.night)
 //            tvGreeting2.text = "Waktunya padamkan bara setelah lelah bekerja."
         }
-        getMood(currentDate)
+        //getMood(currentDate)
     }
     private fun getMood(date : String?){
         showLoading(activity!!, swipeRefreshLayout)
