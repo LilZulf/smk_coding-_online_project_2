@@ -49,7 +49,7 @@ List<MyTargetModel>, private val listener: (MyTargetModel)-> Unit) :
             lateinit var ref: DatabaseReference
             lateinit var auth: FirebaseAuth
             rlItem.setOnClickListener {
-                tampilToast(context, txtTargetTittle.text.toString())
+               // tampilToast(context, txtTargetTittle.text.toString())
                 val action = arrayOf("Update", "Delete")
                 val alert = AlertDialog.Builder(context)
                 alert.setTitle(item.tittle)

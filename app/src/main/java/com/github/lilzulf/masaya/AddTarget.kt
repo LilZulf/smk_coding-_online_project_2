@@ -89,6 +89,5 @@ class AddTarget : AppCompatActivity() {
         }
         setResult(Activity.RESULT_OK)
         finish()
-
     }
 }

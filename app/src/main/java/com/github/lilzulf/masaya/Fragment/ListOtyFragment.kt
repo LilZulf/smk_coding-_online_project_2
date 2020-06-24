@@ -141,9 +141,8 @@ class ListOtyFragment : Fragment() {
     }
     private fun getData() {
         //Mendapatkan Referensi Database
+        showLoading(activity!!, swipeRefreshLayout)
         val year = btYear.text.toString()
-        Toast.makeText(getContext(), "Mohon Tunggu Sebentar..." ,
-            Toast. LENGTH_LONG ).show()
         auth = FirebaseAuth.getInstance()
         val getUserID: String = auth.getCurrentUser()?.getUid(). toString ()
         ref = FirebaseDatabase.getInstance().getReference()
@@ -155,6 +154,7 @@ class ListOtyFragment : Fragment() {
             .addValueEventListener( object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
+                dismissLoading(swipeRefreshLayout)
                 Toast.makeText(getContext(), "Database Error yaa..." ,
                     Toast. LENGTH_LONG ).show()
             }
@@ -169,19 +169,12 @@ class ListOtyFragment : Fragment() {
                     dataTarget.add(target!!)
                 }
                 //Memasang Adapter pada RecyclerView
-//                rv_listTarget. layoutManager = LinearLayoutManager( context )
-//                rv_listTarget. adapter = TargetAdapter2( context!!, dataTarget)
                 rv_listTarget.layoutManager = LinearLayoutManager(context)
                 rv_listTarget.adapter = TargetAdapter2(context!!, dataTarget) {
                 }
-                Toast.makeText(getContext(), "Data Berhasil Dimuat" ,
-                    Toast. LENGTH_LONG ).show()
+                dismissLoading(swipeRefreshLayout)
             }
         })
-    }
-    private fun getDataQuery(){
-        val year = btYear.text.toString()
-        var ref = Firebase.database.getReference("Target")
     }
 
 }

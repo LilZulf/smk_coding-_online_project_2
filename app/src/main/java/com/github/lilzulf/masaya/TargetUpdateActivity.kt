@@ -35,7 +35,7 @@ class TargetUpdateActivity : AppCompatActivity() {
             }else{
 //                Toast.makeText(this,id,Toast.LENGTH_SHORT).show()
 //                Toast.makeText(this,year,Toast.LENGTH_SHORT).show()
-                val newTarget = MyTargetModel(etTitle,year!!,id)
+                val newTarget = MyTargetModel(etTitle,year!!,null)
                 val getUserID: String =
                     auth ?.getCurrentUser()?.getUid(). toString ()
 

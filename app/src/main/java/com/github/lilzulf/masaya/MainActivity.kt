@@ -8,6 +8,8 @@ import androidx.core.content.res.ResourcesCompat
 import com.github.lilzulf.masaya.Adapter.ViewPagerAdapter
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,12 +17,14 @@ class MainActivity : AppCompatActivity() {
     val menuTeks = arrayOf("Diary","Pencapaian","Statistik")
     val menuIcons = arrayOf(R.drawable.ic_mood,R.drawable.ic_content,R.drawable.ic_insert_chart)
     var data : SharedPreferences? = null
+    private var auth : FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val adapter = ViewPagerAdapter(this)
         data = SharedPreferences(applicationContext)
+        auth = FirebaseAuth.getInstance()
         viewPager.setAdapter(adapter)
         TabLayoutMediator(tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy {
                 tab, position ->
@@ -41,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             builder.setPositiveButton("YES"){dialog, which ->
                 // Do something when user press the positive button
                 data!!.clearSharedPreference()
+                auth!!.signOut()
                 val i  = Intent(this@MainActivity,LoginActivity::class.java)
                 startActivity(i)
                 finish()

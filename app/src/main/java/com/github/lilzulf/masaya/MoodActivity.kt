@@ -7,8 +7,12 @@ import android.widget.SeekBar
 import android.widget.Toast
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.MoodResponse
+import com.github.lilzulf.masaya.Object.MyMoodModel
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.tampilToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_mood.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,6 +22,8 @@ class MoodActivity : AppCompatActivity() {
 
     private var data : SharedPreferences? = null
     var isChange : Boolean = false
+    lateinit var ref : DatabaseReference
+    private var auth : FirebaseAuth? = null
     val Mood = arrayOf("Menyedihkan", "Buruk", "Hmmm Ok", "Baik dong","Menyenangkan!")
     val iconsMood = arrayOf(R.drawable.ic_sentiment_very_dissatisfied,R.drawable.ic_sentiment_dissatisfied,
         R.drawable.ic_sentiment,R.drawable.ic_mood,R.drawable.ic_sentiment_very_satisfied
@@ -28,6 +34,8 @@ class MoodActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mood)
         data = SharedPreferences(applicationContext!!)
+        ref = FirebaseDatabase.getInstance().getReference()
+        auth = FirebaseAuth.getInstance()
         // Set a SeekBar change listener
         seek_bar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
@@ -51,7 +59,7 @@ class MoodActivity : AppCompatActivity() {
         })
         btDone.setOnClickListener {
             if(isChange){
-                addMood()
+                addMoodFirebase()
             }else{
                 tampilToast(this,"Mohon untuk menggeser bar")
             }
@@ -87,5 +95,18 @@ class MoodActivity : AppCompatActivity() {
             }
 
         })
+    }
+    private fun addMoodFirebase(){
+        val intentData = intent.extras
+        val date = intentData!!.getString("date").toString()
+        val user_id = auth!!.currentUser!!.uid.toString()
+
+        val target = MyMoodModel(state.toString(), date,null)
+        ref .child(user_id).child( "Mood" ).push().setValue(target).addOnCompleteListener {
+            Toast.makeText( this , "Data Berhasil Disimpan" ,
+                Toast. LENGTH_SHORT ).show()
+        }
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 }

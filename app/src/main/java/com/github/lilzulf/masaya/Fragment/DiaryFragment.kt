@@ -15,13 +15,14 @@ import androidx.fragment.app.Fragment
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.GratefulActivity
 import com.github.lilzulf.masaya.MoodActivity
-import com.github.lilzulf.masaya.Object.MoodDetail
-import com.github.lilzulf.masaya.Object.MoodResponse
+import com.github.lilzulf.masaya.Object.*
 import com.github.lilzulf.masaya.R
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.dismissLoading
 import com.github.lilzulf.masaya.Util.showLoading
 import com.github.lilzulf.masaya.Util.tampilToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_diary.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,6 +36,10 @@ import java.util.*
  */
 class DiaryFragment : Fragment() {
     private var data: SharedPreferences? = null
+    lateinit var ref : DatabaseReference
+    lateinit var auth : FirebaseAuth
+    lateinit var dataTarget2 : ArrayList<MyGrateModel>
+    lateinit var dataTarget : ArrayList<MyMoodModel>
     var cMin = Calendar.getInstance()
     val iconsMood = arrayOf(R.drawable.ic_sentiment_very_dissatisfied,R.drawable.ic_sentiment_dissatisfied,
         R.drawable.ic_sentiment,R.drawable.ic_mood,R.drawable.ic_sentiment_very_satisfied
@@ -52,8 +57,11 @@ class DiaryFragment : Fragment() {
     }override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         data = SharedPreferences(activity!!)
+        auth = FirebaseAuth.getInstance()
+        ref = FirebaseDatabase.getInstance().getReference()
         llParent.visibility = View.GONE
         setGreetings()
+
         btDate.setOnClickListener {
            openDatePicker()
         }
@@ -77,7 +85,8 @@ class DiaryFragment : Fragment() {
             thisAMonth = thisMonth
             thisADay = thisDay
             cMin.set(thisAYear,thisAMonth,thisADay)
-            getMood(sdf.format(cMin.time))
+            //getMood(sdf.format(cMin.time))
+            getMoodFirebase(sdf.format(cMin.time))
             btDate.text = sdf.format(cMin.time)
         }, thisAYear, thisAMonth, thisADay)
         dpd.datePicker.maxDate = Calendar.getInstance().timeInMillis
@@ -109,6 +118,8 @@ class DiaryFragment : Fragment() {
 //            tvGreeting2.text = "Waktunya padamkan bara setelah lelah bekerja."
         }
         //getMood(currentDate)
+        //getGrateFirebase(currentDate)
+        getMoodFirebase(currentDate)
     }
     private fun getMood(date : String?){
         showLoading(activity!!, swipeRefreshLayout)
@@ -198,6 +209,87 @@ class DiaryFragment : Fragment() {
             }
         }
     }
+    private fun getMoodFirebase(date: String?){
+        showLoading(activity!!,swipeRefreshLayout)
+        val getUserID: String = auth.getCurrentUser()?.getUid(). toString ()
+        ref
+            .child(getUserID)
+            .child("Mood")
+            .orderByChild("date")
+            .equalTo(date)
+            .addValueEventListener( object :
+                ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    dismissLoading(swipeRefreshLayout)
+                    Toast.makeText(getContext(), "Database Error yaa..." ,
+                        Toast. LENGTH_LONG ).show()
+                }
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val total = dataSnapshot.childrenCount.toString()
+                    dataTarget = java.util.ArrayList<MyMoodModel>()
 
+                    if(total == "0"){
+                        tampilToast(activity!!,"Ayo ceritakan harimu !")
+                        rl_mood2.visibility = View.GONE
+                        rl_mood_1.visibility = View.VISIBLE
+                        rl_mood_1.setOnClickListener {
+                            navigasiAddMood()
+                        }
+                        getGrateFirebase(date)
+                    }else{
+                        rl_mood2.visibility = View.VISIBLE
+                        rl_mood_1.visibility = View.GONE
+                        tvCardTitle2.text = "Hariku terasa"
+                        tvCardDesc2.visibility = View.VISIBLE
+                        tvCardDesc2.text = Mood[total.toInt()]
+                        getGrateFirebase(date)
+                        for (snapshot in dataSnapshot. children ) {
+                            //Mapping data pada DataSnapshot ke dalam objek mahasiswa
+                            val target = snapshot.getValue(MyMoodModel:: class . java )
+                            //Mengambil Primary Key, digunakan untuk proses Update dan
+                            iv_edit2_.setImageResource(iconsMood[target!!.state.toInt()])
+                            tvCardDesc2.text = Mood[target!!.state.toInt()]
+                        }
+                    }
+
+                }
+            })
+    }
+
+    private fun getGrateFirebase(date : String?){
+        showLoading(activity!!, swipeRefreshLayout)
+
+        val getUserID: String = auth.getCurrentUser()?.getUid(). toString ()
+
+        ref
+            .child(getUserID)
+            .child( "Grate" )
+            .orderByChild("date")
+            .equalTo(date)
+            .addValueEventListener( object :
+                ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    dismissLoading(swipeRefreshLayout)
+                    Toast.makeText(getContext(), "Database Error yaa..." ,
+                        Toast. LENGTH_LONG ).show()
+                }
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val total = dataSnapshot.childrenCount.toString()
+                    if(total == "0"){
+                        rl_grate2.visibility = View.GONE
+                        rl_grate1.visibility = View.VISIBLE
+                        llParent.visibility = View.VISIBLE
+                        dismissLoading(swipeRefreshLayout)
+                    }else{
+                        rl_grate1.visibility = View.GONE
+                        rl_grate2.visibility = View.VISIBLE
+                        tv_edit3.text = total
+                        llParent.visibility = View.VISIBLE
+                        dismissLoading(swipeRefreshLayout)
+                    }
+
+                }
+            })
+    }
 
 }
