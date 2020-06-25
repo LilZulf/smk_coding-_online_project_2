@@ -3,13 +3,18 @@ package com.github.lilzulf.masaya
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import com.github.lilzulf.masaya.Adapter.ViewPagerAdapter
 import com.github.lilzulf.masaya.Util.SharedPreferences
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(this)
         data = SharedPreferences(applicationContext)
         auth = FirebaseAuth.getInstance()
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
+        checkToken()
         viewPager.setAdapter(adapter)
         TabLayoutMediator(tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy {
                 tab, position ->
@@ -61,5 +68,22 @@ class MainActivity : AppCompatActivity() {
             // Display the alert dialog on app interface
             dialog.show()
         }
+    }
+    private fun checkToken(){
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("Failed : ", "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                val token = task.result?.token
+
+                // Log and toast
+                val msg = getString(R.string.msg_token_fmt, token)
+                Log.d("Msg : ", msg)
+                //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            })
     }
 }

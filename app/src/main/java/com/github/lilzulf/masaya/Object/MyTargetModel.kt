@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class MyTargetModel(
     var tittle : String,
     var date : String,
-    @PrimaryKey var key : String?
+    @PrimaryKey(autoGenerate = true) var key : String?
 ){
     constructor () : this ( "" , "",""
     )

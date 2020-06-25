@@ -23,7 +23,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.target_item.*
 
 class TargetAdapter2(private val context: Context, private val items:
-List<MyTargetModel>, private val listener: (MyTargetModel)-> Unit) :
+List<MyTargetModel>, var listener: (MyTargetModel)-> Unit) :
     RecyclerView.Adapter<TargetAdapter2.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(

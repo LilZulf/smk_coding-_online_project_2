@@ -269,7 +269,7 @@ class DiaryFragment : Fragment() {
             .addValueEventListener( object :
                 ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
-                    dismissLoading(swipeRefreshLayout)
+                    //dismissLoading(swipeRefreshLayout)
                     Toast.makeText(getContext(), "Database Error yaa..." ,
                         Toast. LENGTH_LONG ).show()
                 }

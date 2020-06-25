@@ -23,4 +23,6 @@ interface MyTargetDao {
     suspend   fun delete(myFriend:   MyTargetModel)
     @Query ( "DELETE   FROM   my_target" )
     suspend   fun deleteAll()
+    @Query("SELECT * FROM my_target WHERE date = :date")
+    fun getByDate(date: String) : List<MyTargetModel>
 }

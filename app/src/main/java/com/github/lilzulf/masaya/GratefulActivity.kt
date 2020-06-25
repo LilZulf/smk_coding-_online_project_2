@@ -109,11 +109,11 @@ class GratefulActivity : AppCompatActivity() {
 //
 //        })
 //    }
-    private fun tampilGrate(githubUsers: List<DataGrate>) {
-        rcGrate.layoutManager = LinearLayoutManager(applicationContext)
-        rcGrate.adapter = GrateAdapeter1(applicationContext, githubUsers) {
-        }
-    }
+//    private fun tampilGrate(githubUsers: List<DataGrate>) {
+//        rcGrate.layoutManager = LinearLayoutManager(applicationContext)
+//        rcGrate.adapter = GrateAdapeter1(applicationContext, githubUsers) {
+//        }
+//    }
     private fun getData() {
         //Mendapatkan Referensi Database
         val intentData = intent.extras

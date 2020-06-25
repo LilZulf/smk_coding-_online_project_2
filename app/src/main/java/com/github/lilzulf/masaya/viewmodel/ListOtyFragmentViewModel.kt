@@ -16,7 +16,7 @@ class ListOtyFragmentViewModel() : ViewModel() {
     fun init(context: Context) {
         val myTargetDao = MyTargetDatabase.getDatabase(context).myTargetDao()
         repository = MyTargetRepo(myTargetDao)
-        allMyTarget = repository.allMyFriend
+        allMyTarget = repository.allMyTarget
     }
     fun delete(myTarget: MyTargetModel) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(myTarget)

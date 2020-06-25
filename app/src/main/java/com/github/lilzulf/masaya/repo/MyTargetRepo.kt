@@ -7,7 +7,7 @@ import com.github.lilzulf.masaya.dao.MyTargetDao
 class MyTargetRepo(private val myFriendDao: MyTargetDao) {
     // Room executes all queries on a separate thread.
 // Observed LiveData will notify the observer when the data has changed.
-    val allMyFriend: LiveData<List<MyTargetModel>> =
+    val allMyTarget: LiveData<List<MyTargetModel>> =
         myFriendDao.getAllMyFriend()
     suspend fun insert(myFriend: MyTargetModel) {
         myFriendDao.insert(myFriend)
