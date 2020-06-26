@@ -47,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:visibility="gone"
             >
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -169,4 +170,12 @@
             android:visibility="gone"
             />
     </LinearLayout>
+    <com.anychart.AnyChartView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tb_add"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="@dimen/_20sdp"
+        android:id="@+id/ChartMood"
+        />
 </RelativeLayout>

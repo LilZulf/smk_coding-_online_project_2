@@ -3,8 +3,7 @@ package com.github.lilzulf.masaya.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.github.lilzulf.masaya.Object.MyTargetModel
-
-interface MyTargetDao {
+@Dao interface MyTargetDao {
 
     @Query( "SELECT   *   from   my_target" )
     fun getAllMyFriend(): LiveData<List<MyTargetModel>>

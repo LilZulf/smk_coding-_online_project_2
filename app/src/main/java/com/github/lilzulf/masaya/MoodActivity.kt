@@ -100,11 +100,12 @@ class MoodActivity : AppCompatActivity() {
         val intentData = intent.extras
         val date = intentData!!.getString("date").toString()
         val user_id = auth!!.currentUser!!.uid.toString()
-
         val target = MyMoodModel(state.toString(), date,null)
         ref .child(user_id).child( "Mood" ).push().setValue(target).addOnCompleteListener {
             Toast.makeText( this , "Data Berhasil Disimpan" ,
                 Toast. LENGTH_SHORT ).show()
+            data!!.setString("MOOD",state.toString())
+            data!!.setString("MOOD_DATE",date)
         }
         setResult(Activity.RESULT_OK)
         finish()

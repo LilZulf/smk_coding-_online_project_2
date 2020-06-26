@@ -4,11 +4,13 @@ import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.MyTargetModel
 import com.github.lilzulf.masaya.Object.ResponseAuth
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.tampilToast
+import com.github.lilzulf.masaya.viewmodel.MyTargetViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -22,6 +24,7 @@ class AddTarget : AppCompatActivity() {
     lateinit var ref : DatabaseReference
     private var auth : FirebaseAuth? = null
     private val date = "2020"
+    private val viewModel by viewModels<MyTargetViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_target)
@@ -82,10 +85,11 @@ class AddTarget : AppCompatActivity() {
         val title = etTarget.text.toString()
         val user_id = auth!!.currentUser!!.uid.toString()
 
-        val target = MyTargetModel(title, year,null)
+        val target = MyTargetModel(title, year,"")
         ref .child(user_id).child( "Target" ).push().setValue(target).addOnCompleteListener {
             Toast.makeText( this , "Data Berhasil Disimpan" ,
                 Toast. LENGTH_SHORT ).show()
+            viewModel.addData(target)
         }
         setResult(Activity.RESULT_OK)
         finish()

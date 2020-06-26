@@ -3,7 +3,10 @@ package com.github.lilzulf.masaya.Fragment
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -61,18 +64,81 @@ class DiaryFragment : Fragment() {
         ref = FirebaseDatabase.getInstance().getReference()
         llParent.visibility = View.GONE
         setGreetings()
+        val cm = context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+        if(!isConnected){
+            tampilToast(context!!,"Mode Offline")
+            init()
+            btDate.setOnClickListener {
+                tampilToast(activity!!,"Anda berada di mode offline")
+            }
+            rl_mood2.setOnClickListener {
+                tampilToast(activity!!,"Anda berada di mode offline")
+            }
+            rl_grate2.setOnClickListener {
+                tampilToast(activity!!,"Anda berada di mode offline")
+            }
+            rl_grate1.setOnClickListener {
+                tampilToast(activity!!,"Anda berada di mode offline")
+            }
+            rl_mood_1.setOnClickListener {
+                tampilToast(activity!!,"Anda berada di mode offline")
+            }
+        }else{
+            btDate.setOnClickListener {
+                openDatePicker()
+            }
+            rl_mood2.setOnClickListener {
+                tampilToast(activity!!,"Kamu sudah ceritakan hari ini")
+            }
+            rl_grate2.setOnClickListener {
+                navigasiAddGrate()
+            }
+            rl_grate1.setOnClickListener {
+                navigasiAddGrate()
+            }
+        }
 
-        btDate.setOnClickListener {
-           openDatePicker()
-        }
-        rl_mood2.setOnClickListener {
-            tampilToast(activity!!,"Kamu sudah ceritakan hari ini")
-        }
-        rl_grate2.setOnClickListener {
-            navigasiAddGrate()
-        }
-        rl_grate1.setOnClickListener {
-            navigasiAddGrate()
+
+
+    }
+    private fun init(){
+        llParent.visibility= View.VISIBLE
+        val MoodDate = data!!.getString("MOOD_DATE")
+        val Mood = data!!.getString("MOOD")
+        val GrateDate = data!!.getString("COUNT_DATE")
+        val GrateCount = data!!.getString("COUNT_GRATE")
+        //tampilToast(context!!,GrateCount.toString())
+        if(MoodDate != btDate.text ||GrateDate != btDate.text ){
+            llParent.visibility = View.VISIBLE
+            dismissLoading(swipeRefreshLayout)
+            data!!.clearSharedPreference()
+        }else{
+            if(Mood != ""){
+                moodSetter(Mood!!.toInt())
+                dismissLoading(swipeRefreshLayout)
+            }
+            if(GrateCount != "0"){
+                //tampilToast(context!!,GrateCount.toString())
+                rl_grate1.visibility = View.GONE
+                rl_grate2.visibility = View.VISIBLE
+                tv_edit3.text = GrateCount
+                llParent.visibility = View.VISIBLE
+                dismissLoading(swipeRefreshLayout)
+
+            }else{
+                tampilToast(activity!!,"Ayo ceritakan harimu !")
+                rl_mood2.visibility = View.GONE
+                rl_mood_1.visibility = View.VISIBLE
+//                rl_mood_1.setOnClickListener {
+//                    navigasiAddMood()
+//                }
+                rl_grate2.visibility = View.GONE
+                rl_grate1.visibility = View.VISIBLE
+                llParent.visibility = View.VISIBLE
+                dismissLoading(swipeRefreshLayout)
+            }
         }
     }
     private fun openDatePicker(){
@@ -100,6 +166,7 @@ class DiaryFragment : Fragment() {
         val currentDate = sdf.format(Date())
 
         btDate.text = currentDate.toString()
+
         if (timeOfDay >= 0 && timeOfDay < 12) {
             Toast.makeText(activity!!, "Selamat Pagi", Toast.LENGTH_SHORT).show()
             tvGreeting.text = "Selamat pagi, "+"\n"+getString(R.string.moring)
@@ -237,23 +304,33 @@ class DiaryFragment : Fragment() {
                         }
                         getGrateFirebase(date)
                     }else{
-                        rl_mood2.visibility = View.VISIBLE
-                        rl_mood_1.visibility = View.GONE
-                        tvCardTitle2.text = "Hariku terasa"
-                        tvCardDesc2.visibility = View.VISIBLE
-                        tvCardDesc2.text = Mood[total.toInt()]
-                        getGrateFirebase(date)
+//                        rl_mood2.visibility = View.VISIBLE
+//                        rl_mood_1.visibility = View.GONE
+//                        tvCardTitle2.text = "Hariku terasa"
+//                        tvCardDesc2.visibility = View.VISIBLE
+                        //tvCardDesc2.text = Mood[total.toInt()]
+
                         for (snapshot in dataSnapshot. children ) {
                             //Mapping data pada DataSnapshot ke dalam objek mahasiswa
                             val target = snapshot.getValue(MyMoodModel:: class . java )
-                            //Mengambil Primary Key, digunakan untuk proses Update dan
-                            iv_edit2_.setImageResource(iconsMood[target!!.state.toInt()])
-                            tvCardDesc2.text = Mood[target!!.state.toInt()]
+//                            //Mengambil Primary Key, digunakan untuk proses Update dan
+//                            iv_edit2_.setImageResource(iconsMood[target!!.state.toInt()])
+//                            tvCardDesc2.text = Mood[target!!.state.toInt()]
+                            moodSetter(target!!.state.toInt())
                         }
+                        getGrateFirebase(date)
                     }
 
                 }
             })
+    }
+    private fun moodSetter(state : Int){
+        rl_mood2.visibility = View.VISIBLE
+        rl_mood_1.visibility = View.GONE
+        tvCardTitle2.text = "Hariku terasa"
+        tvCardDesc2.visibility = View.VISIBLE
+        iv_edit2_.setImageResource(iconsMood[state])
+        tvCardDesc2.text = Mood[state]
     }
 
     private fun getGrateFirebase(date : String?){
@@ -279,12 +356,16 @@ class DiaryFragment : Fragment() {
                         rl_grate2.visibility = View.GONE
                         rl_grate1.visibility = View.VISIBLE
                         llParent.visibility = View.VISIBLE
+                        data!!.setString("COUNT_GRATE", total)
+                        data!!.setString("COUNT_DATE",date.toString())
                         dismissLoading(swipeRefreshLayout)
                     }else{
                         rl_grate1.visibility = View.GONE
                         rl_grate2.visibility = View.VISIBLE
                         tv_edit3.text = total
                         llParent.visibility = View.VISIBLE
+                        data!!.setString("COUNT_GRATE", total)
+                        data!!.setString("COUNT_DATE",date.toString())
                         dismissLoading(swipeRefreshLayout)
                     }
 

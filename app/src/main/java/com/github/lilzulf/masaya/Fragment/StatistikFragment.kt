@@ -29,9 +29,9 @@ class StatistikFragment : Fragment() {
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rl_mood.setOnClickListener {
-//            val i = Intent(activity!!, StatisticMood::class.java)
-//            startActivity(i)
-            tampilToast(activity!!,"Coming soon")
+            val i = Intent(activity!!, StatisticMood::class.java)
+            startActivity(i)
+            //tampilToast(activity!!,"Coming soon")
         }
         rl_grate.setOnClickListener {
             val i = Intent(activity!!, GratefulHistory::class.java)

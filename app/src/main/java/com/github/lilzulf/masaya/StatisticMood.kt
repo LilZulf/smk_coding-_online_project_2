@@ -1,12 +1,15 @@
 package com.github.lilzulf.masaya
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.anychart.AnyChart
+import com.anychart.AnyChartView
+import com.anychart.chart.common.dataentry.DataEntry
+import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.MoodDetail
-import com.github.lilzulf.masaya.Object.MoodResponse
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.tampilToast
 import kotlinx.android.synthetic.main.activity_statistic_mood.*
@@ -14,13 +17,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class StatisticMood : AppCompatActivity() {
     private var data : SharedPreferences? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistic_mood)
         data = SharedPreferences(applicationContext!!)
-        getMood()
+       // getMood()
+        chart()
         iv_close.setOnClickListener {
             finish()
         }
@@ -52,5 +57,18 @@ class StatisticMood : AppCompatActivity() {
             }
 
         })
+    }
+    private fun chart(){
+        val pie = AnyChart.pie()
+
+        val data: MutableList<DataEntry> = ArrayList()
+        data.add(ValueDataEntry("John", 10000))
+        data.add(ValueDataEntry("Jake", 12000))
+        data.add(ValueDataEntry("Peter", 18000))
+
+        pie.data(data)
+
+        val anyChartView = findViewById(R.id.ChartMood) as AnyChartView
+        anyChartView.setChart(pie)
     }
 }

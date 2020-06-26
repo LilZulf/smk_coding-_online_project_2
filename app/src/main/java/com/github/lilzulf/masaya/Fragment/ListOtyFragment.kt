@@ -12,12 +12,16 @@ import android.widget.NumberPicker.OnValueChangeListener
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.lilzulf.masaya.Adapter.GrateAdapeter3
 import com.github.lilzulf.masaya.Adapter.TargetAdapter
 import com.github.lilzulf.masaya.Adapter.TargetAdapter2
 import com.github.lilzulf.masaya.AddTarget
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.DataItem
+import com.github.lilzulf.masaya.Object.MyGrateModel
 import com.github.lilzulf.masaya.Object.MyTargetModel
 import com.github.lilzulf.masaya.Object.TargetResponse
 import com.github.lilzulf.masaya.R
@@ -25,6 +29,7 @@ import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.dismissLoading
 import com.github.lilzulf.masaya.Util.showLoading
 import com.github.lilzulf.masaya.Util.tampilToast
+import com.github.lilzulf.masaya.viewmodel.ListOtyFragmentViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
@@ -39,11 +44,15 @@ import retrofit2.Response
 /**
  * A simple [Fragment] subclass.
  */
-class ListOtyFragment : Fragment() {
+class ListOtyFragment : Fragment(){
     private var data: SharedPreferences? = null
     lateinit var ref : DatabaseReference
     lateinit var auth : FirebaseAuth
-    lateinit var dataTarget : ArrayList<MyTargetModel>
+    var dataTarget : ArrayList<MyTargetModel> = ArrayList()
+    var dataTarget2: MutableList<MyTargetModel> = ArrayList()
+    private val viewModel by viewModels<ListOtyFragmentViewModel>()
+    private var adapter: TargetAdapter2? = null
+
     companion object {
         val REQUEST_CODE = 100
     }
@@ -58,6 +67,21 @@ class ListOtyFragment : Fragment() {
         data = SharedPreferences(activity!!)
         //getTransaksi()+++++
         getData()
+        init()
+        rv_listTarget.layoutManager = LinearLayoutManager(context)
+        viewModel.init(requireContext());
+        viewModel.allMyTarget.observe(viewLifecycleOwner, Observer { myTarget ->
+// Update the cached copy of the words in the adapter.
+           // myFriends?.let { adapter?.setData(it) }
+            myTarget?.let {
+                //adapter?.updateItems(it)
+                rv_listTarget.adapter = TargetAdapter2(context!!, it){}
+                Log.d("Mytarget",it.toString())
+                dismissLoading(swipeRefreshLayout)
+            }
+
+        })
+
         rl_target.setOnClickListener {
 //            val i = Intent(activity!!,AddTarget::class.java)
 //            startActivity(i)
@@ -76,6 +100,16 @@ class ListOtyFragment : Fragment() {
             getData()
         }
     }
+    private fun init(){
+        Log.d("dataTargert2",dataTarget.toString())
+        rv_listTarget.layoutManager = LinearLayoutManager(context)
+        //adapter = TargetAdapter2(requireContext(), dataTarget2)
+        //rv_listTarget.adapter = adapter
+        rv_listTarget.adapter = TargetAdapter2(context!!, dataTarget) {
+        }
+        //adapter?.listener = this
+    }
+
     private fun getTransaksi() {
         showLoading(activity!!, swipeRefreshLayout)
         val TransaksiModel = ServiceRequest.get().doTarget(
@@ -161,20 +195,24 @@ class ListOtyFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //Inisialisasi ArrayList
                 dataTarget = java.util.ArrayList<MyTargetModel>()
+                //dataTarget2 = ArrayList()
                 for (snapshot in dataSnapshot. children ) {
                     //Mapping data pada DataSnapshot ke dalam objek mahasiswa
                     val target = snapshot.getValue(MyTargetModel:: class . java )
                     //Mengambil Primary Key, digunakan untuk proses Update dan
-                    target?.key = snapshot.key.toString()
+                    target?.key = snapshot.key!!
                     dataTarget.add(target!!)
                 }
                 //Memasang Adapter pada RecyclerView
-                rv_listTarget.layoutManager = LinearLayoutManager(context)
-                rv_listTarget.adapter = TargetAdapter2(context!!, dataTarget) {
-                }
+//                rv_listTarget.layoutManager = LinearLayoutManager(context)
+//                rv_listTarget.adapter = TargetAdapter2(context!!, dataTarget2) {
+//                }
+                viewModel.insertAll(dataTarget)
                 dismissLoading(swipeRefreshLayout)
             }
         })
     }
+
+
 
 }
