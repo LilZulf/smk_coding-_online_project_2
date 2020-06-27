@@ -19,7 +19,7 @@ Screen Shots :
 
 ![Image of NewDiary](https://raw.githubusercontent.com/LilZulf/smk_coding-_online_project_2/master/ScreenShot/Screenshot_20200627-231713.jpg)
 
-![Image of statistik](https://raw.githubusercontent.com/LilZulf/smk_coding-_online_project_2/master/ScreenShot/Screenshot_20200627-231724.jpg)
+![Image of statistik](https://raw.githubusercontent.com/LilZulf/smk_coding-_online_project_2/master/ScreenShot/Screenshot_20200517-235401.jpg)
 
 ![Image of addDiary](https://raw.githubusercontent.com/LilZulf/smk_coding-_online_project_2/master/ScreenShot/Screenshot_20200517-235421.jpg)
 
@@ -27,7 +27,7 @@ Screen Shots :
 
 ![Image of addTarget](https://raw.githubusercontent.com/LilZulf/smk_coding-_online_project_2/master/ScreenShot/Screenshot_20200517-235505.jpg)
 
-![Image of history](https://raw.githubusercontent.com/LilZulf/smk_coding-_online_project_2/master/ScreenShot/Screenshot_20200517-235522.jpg)
+![Image of history](https://raw.githubusercontent.com/LilZulf/smk_coding-_online_project_2/master/ScreenShot/Screenshot_20200627-231724.jpg)
 
 ![Image of hisory2](https://raw.githubusercontent.com/LilZulf/smk_coding-_online_project_2/master/ScreenShot/Screenshot_20200517-235545.jpg)
 
