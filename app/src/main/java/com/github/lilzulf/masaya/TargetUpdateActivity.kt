@@ -25,7 +25,7 @@ class TargetUpdateActivity : AppCompatActivity() {
         val id = intentData!!.getString("id")
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference()
-
+        viewModel.init(this@TargetUpdateActivity);
         etTarget.setText(title)
         iv_close.setOnClickListener {
             finish()

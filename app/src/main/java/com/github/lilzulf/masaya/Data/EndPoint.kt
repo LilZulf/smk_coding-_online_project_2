@@ -4,6 +4,7 @@ import com.github.lilzulf.masaya.Object.*
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface EndPoint {
@@ -79,4 +80,6 @@ interface EndPoint {
     fun getGrate(
         @Field("idUser") id_user : String
     ):Call<ResponseGrateList>
+    @GET("random?tags=happiness|inspirational&maxLength=100")
+    fun getQuotes():Call<QuotesResponse>
 }

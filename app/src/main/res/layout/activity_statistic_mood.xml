@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Riwayat"
+                android:text="Statistik"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:textColor="#ffffff"
@@ -100,7 +100,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="menyenangkan"
+
                     android:id="@+id/menyenangkan"
                     android:textSize="@dimen/_14ssp"
                     android:textColor="@color/darkest_text"
@@ -108,7 +108,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="baik"
+
                     android:id="@+id/baik"
                     android:textSize="@dimen/_14ssp"
                     android:textColor="@color/darkest_text"
@@ -116,7 +116,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="biasa"
+
                     android:id="@+id/biasa"
                     android:textSize="@dimen/_14ssp"
                     android:textColor="@color/darkest_text"
@@ -124,7 +124,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="buruk"
+
                     android:id="@+id/buruk"
                     android:textSize="@dimen/_14ssp"
                     android:textColor="@color/darkest_text"
@@ -132,7 +132,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="menyedihkan"
                     android:id="@+id/menyedihkan"
                     android:textSize="@dimen/_14ssp"
                     android:textColor="@color/darkest_text"
@@ -172,10 +171,10 @@
     </LinearLayout>
     <com.anychart.AnyChartView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/_400sdp"
         android:layout_below="@id/tb_add"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="@dimen/_20sdp"
+        android:visibility="visible"
         android:id="@+id/ChartMood"
         />
 </RelativeLayout>

@@ -150,7 +150,6 @@
                     android:id="@+id/rl_grate"
                     android:layout_below="@id/rl_mood"
                     android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_7sdp"
                     >
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -222,6 +221,46 @@
                         </LinearLayout>
 
                     </RelativeLayout>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:background="@drawable/bg_rounded_retangle"
+                    android:elevation="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:id="@+id/rl_quote"
+                    android:layout_below="@id/rl_grate"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_25sdp"
+                        android:id="@+id/rl_quotes"
+                        android:visibility="visible"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:src="@drawable/ic_format_quote_black_24dp"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/iv_quote"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/iv_quote"
+                            android:layout_centerVertical="true"
+                            android:text="Quote "
+                            android:textColor="#ffff"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_20ssp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            />
+                    </RelativeLayout>
+
 
                 </RelativeLayout>
             </RelativeLayout>

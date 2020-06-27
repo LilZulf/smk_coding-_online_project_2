@@ -11,9 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TargetUpdateActivity"></activity>
+        <activity android:name=".QuotesActivity"></activity>
+        <activity android:name=".TargetUpdateActivity" />
         <activity android:name=".TestActivity" />
-        <activity android:name=".SplashScreen" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="nosensor" />
@@ -26,13 +27,14 @@
         <activity android:name=".AddTarget" />
         <activity android:name=".GratefulActivity" />
         <activity android:name=".MoodActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".Data.FireBaseService"
             android:exported="false">
@@ -40,6 +42,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_emoticons" />

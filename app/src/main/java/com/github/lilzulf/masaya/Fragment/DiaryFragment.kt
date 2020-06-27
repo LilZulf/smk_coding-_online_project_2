@@ -15,10 +15,12 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
+import com.github.lilzulf.masaya.Data.FireBaseService
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.GratefulActivity
 import com.github.lilzulf.masaya.MoodActivity
 import com.github.lilzulf.masaya.Object.*
+import com.github.lilzulf.masaya.QuotesActivity
 import com.github.lilzulf.masaya.R
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.dismissLoading
@@ -85,6 +87,9 @@ class DiaryFragment : Fragment() {
             rl_mood_1.setOnClickListener {
                 tampilToast(activity!!,"Anda berada di mode offline")
             }
+            rl_quote.setOnClickListener {
+                tampilToast(activity!!,"Anda berada di mode offline")
+            }
         }else{
             btDate.setOnClickListener {
                 openDatePicker()
@@ -98,11 +103,15 @@ class DiaryFragment : Fragment() {
             rl_grate1.setOnClickListener {
                 navigasiAddGrate()
             }
+            rl_quote.setOnClickListener {
+               val i = Intent(requireActivity(),QuotesActivity::class.java)
+                startActivity(i)
+            }
         }
 
 
-
     }
+
     private fun init(){
         llParent.visibility= View.VISIBLE
         val MoodDate = data!!.getString("MOOD_DATE")
@@ -317,6 +326,8 @@ class DiaryFragment : Fragment() {
 //                            iv_edit2_.setImageResource(iconsMood[target!!.state.toInt()])
 //                            tvCardDesc2.text = Mood[target!!.state.toInt()]
                             moodSetter(target!!.state.toInt())
+                            data!!.setString("MOOD",target!!.state)
+                            data!!.setString("MOOD_DATE",date.toString())
                         }
                         getGrateFirebase(date)
                     }

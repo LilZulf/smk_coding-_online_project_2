@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.ResponseAuth
 import com.github.lilzulf.masaya.Object.Test
 import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.tampilToast
+import kotlinx.android.synthetic.main.activity_splash_screen.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
@@ -50,6 +52,7 @@ class SplashScreen : AppCompatActivity() {
     }
     private fun intentTo(){
         val handler = Handler()
+        tvLogo.visibility = View.VISIBLE
         handler.postDelayed({
             if(data!!.getSession("LOGIN")){
                 val intent = Intent(this@SplashScreen, MainActivity::class.java)

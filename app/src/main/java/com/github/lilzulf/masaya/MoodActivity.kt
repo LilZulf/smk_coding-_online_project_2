@@ -29,6 +29,7 @@ class MoodActivity : AppCompatActivity() {
         R.drawable.ic_sentiment,R.drawable.ic_mood,R.drawable.ic_sentiment_very_satisfied
         )
     var state : Int? = null
+    //private val viewModel by viewModels<MyTa\>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,7 @@ class MoodActivity : AppCompatActivity() {
         data = SharedPreferences(applicationContext!!)
         ref = FirebaseDatabase.getInstance().getReference()
         auth = FirebaseAuth.getInstance()
+
         // Set a SeekBar change listener
         seek_bar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="@dimen/_20sdp"
+    android:animateLayoutChanges="true"
     tools:context=".MoodActivity">
 
     <TextView

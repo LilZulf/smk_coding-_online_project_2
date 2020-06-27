@@ -7,7 +7,8 @@ object ServiceRequest{
     private  var endpoint : EndPoint ? = null
 
     //private val BASE_URL = "https://capitular-defeat.000webhostapp.com/api-skeleton/MasayaApi/"
-   private var BASE_URL = "https://masaya-api.000webhostapp.com/api/MasayaApi/"
+   //private var BASE_URL = "https://masaya-api.000webhostapp.com/api/MasayaApi/"
+    private var BASE_URL = "https://api.quotable.io/"
 
     fun get(): EndPoint {
         if (endpoint == null){

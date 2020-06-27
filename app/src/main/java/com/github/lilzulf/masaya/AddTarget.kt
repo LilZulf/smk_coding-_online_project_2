@@ -31,6 +31,7 @@ class AddTarget : AppCompatActivity() {
         data = SharedPreferences(applicationContext!!)
         ref = FirebaseDatabase.getInstance().getReference()
         auth = FirebaseAuth.getInstance()
+        viewModel.init(this@AddTarget);
         iv_close.setOnClickListener {
             setResult(Activity.RESULT_CANCELED)
             finish()

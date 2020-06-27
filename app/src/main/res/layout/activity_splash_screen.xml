@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".SplashScreen">
 
     <TextView
@@ -15,6 +16,8 @@
         android:fontFamily="@font/sweety_strawberry"
         android:textColor="@color/colorPrimary"
         android:layout_centerVertical="true"
+        android:id="@+id/tvLogo"
+        android:visibility="gone"
         />
 
 </RelativeLayout>
