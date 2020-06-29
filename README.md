@@ -4,7 +4,8 @@ Masaya adalah aplikasi jurnal harian yang dapat mencatat keseharian anda.
 
 
 
-Link Google drive : https://drive.google.com/file/d/18lDanxecdkOW6txj08JzUeu6i2_1v4Yk/view?usp=sharing
+Link Google drive : https://drive.google.com/file/d/1jdFenHkHhUU0totwa-F1HtMjOOSK4D1W/view?usp=sharing
+
 Screen Shots :
 
 ![Image of Login](https://raw.githubusercontent.com/LilZulf/smk_coding-_online_project_2/master/ScreenShot/Screenshot_20200517-235303.jpg)
