@@ -180,7 +180,7 @@ class DiaryFragment : Fragment() {
 
         if (timeOfDay >= 0 && timeOfDay < 12) {
             Toast.makeText(activity!!, "Selamat Pagi", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat pagi"+username+"\n"+getString(R.string.moring)
+            tvGreeting.text = "Selamat pagi, "+username+"\n"+getString(R.string.moring)
 //            tvGreeting2.text = "Tuliskan dalam hatimu bahwa setiap hari adalah hari terbaik dalam setahun."
         } else if (timeOfDay >= 12 && timeOfDay < 16) {
             Toast.makeText(activity!!, "Selamat Siang", Toast.LENGTH_SHORT).show()

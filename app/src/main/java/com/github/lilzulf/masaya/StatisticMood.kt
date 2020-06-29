@@ -16,6 +16,7 @@ import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.DataEntry
@@ -236,6 +237,7 @@ class StatisticMood : AppCompatActivity() {
             .setContentText(messageBody)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(messageBody))
             .setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
