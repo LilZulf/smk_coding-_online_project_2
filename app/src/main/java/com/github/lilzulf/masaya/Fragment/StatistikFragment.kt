@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
 import com.github.lilzulf.masaya.*
+import com.github.lilzulf.masaya.Util.SharedPreferences
 import com.github.lilzulf.masaya.Util.tampilToast
 
 import kotlinx.android.synthetic.main.fragment_statistik.*
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_statistik.*
  * A simple [Fragment] subclass.
  */
 class StatistikFragment : Fragment() {
-
+    private var data: SharedPreferences? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,15 +29,28 @@ class StatistikFragment : Fragment() {
 
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rl_mood.setOnClickListener {
-            val i = Intent(activity!!, StatisticMood::class.java)
-            startActivity(i)
-            //tampilToast(activity!!,"Coming soon")
+        data = SharedPreferences(activity!!)
+
+        if(data!!.getString("MODE").equals("ONLINE")){
+            rl_mood.setOnClickListener {
+                val i = Intent(activity!!, StatisticMood::class.java)
+                startActivity(i)
+                //tampilToast(activity!!,"Coming soon")
+            }
+            rl_grate.setOnClickListener {
+                val i = Intent(activity!!, GratefulHistory::class.java)
+                startActivity(i)
+            }
+        }else{
+            rl_mood.setOnClickListener {
+                tampilToast(context!!,"Anda mode offline")
+                //tampilToast(activity!!,"Coming soon")
+            }
+            rl_grate.setOnClickListener {
+                tampilToast(context!!,"Anda mode offline")
+            }
         }
-        rl_grate.setOnClickListener {
-            val i = Intent(activity!!, GratefulHistory::class.java)
-            startActivity(i)
-        }
+
     }
 
 

@@ -80,6 +80,6 @@ interface EndPoint {
     fun getGrate(
         @Field("idUser") id_user : String
     ):Call<ResponseGrateList>
-    @GET("random?tags=happiness|inspirational&maxLength=100")
+    @GET("random?tags=happiness|inspirational")
     fun getQuotes():Call<QuotesResponse>
 }

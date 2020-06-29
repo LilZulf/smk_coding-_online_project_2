@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.QuotesResponse
@@ -20,6 +22,7 @@ class QuotesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_quotes)
         doQuote()
         parentQuote.visibility = View.GONE
+        btQuote.visibility = View.GONE
         btQuote.setOnClickListener {
             doQuote()
         }
@@ -40,6 +43,10 @@ class QuotesActivity : AppCompatActivity() {
                 tvQuote.text = response.body()!!.content.toString()
                 tvName.text = "- "+response.body()!!.author.toString()
                 parentQuote.visibility = View.VISIBLE
+                val animFadeIn: Animation =
+                    AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in)
+                parentQuote.startAnimation(animFadeIn)
+                btQuote.visibility = View.VISIBLE
                 //Log.d("Data",response.body()!!.toString())
             }
 

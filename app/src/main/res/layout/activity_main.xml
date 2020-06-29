@@ -33,9 +33,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/_20sdp"
-                android:src="@drawable/ic_exit"
-                android:tint="@color/darkest_text"
-                android:id="@+id/ic_logout"
+                android:src="@drawable/ic_more_vert"
+                android:id="@+id/ic_more"
 
                 />
         </RelativeLayout>

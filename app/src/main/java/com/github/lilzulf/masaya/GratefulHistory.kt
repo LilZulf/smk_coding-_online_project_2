@@ -2,6 +2,7 @@ package com.github.lilzulf.masaya
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.lilzulf.masaya.Adapter.GrateAdapeter1
@@ -32,6 +33,8 @@ class GratefulHistory : AppCompatActivity() {
         iv_close.setOnClickListener {
             finish()
         }
+        ivNull.visibility = View.VISIBLE
+        txtNull.visibility = View.VISIBLE
         //getGrate()
         getData()
 
@@ -80,12 +83,17 @@ class GratefulHistory : AppCompatActivity() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     //Inisialisasi ArrayList
                     dataTarget = java.util.ArrayList<MyGrateModel>()
+                    val total = dataSnapshot.childrenCount.toString()
                     for (snapshot in dataSnapshot. children ) {
                         //Mapping data pada DataSnapshot ke dalam objek mahasiswa
                         val target = snapshot.getValue(MyGrateModel:: class . java )
                         //Mengambil Primary Key, digunakan untuk proses Update dan
                         target?.key = snapshot.key.toString()
                         dataTarget.add(target!!)
+                    }
+                    if(total != "0"){
+                        ivNull.visibility = View.GONE
+                        txtNull.visibility = View.GONE
                     }
                     //Memasang Adapter pada RecyclerView
                     rv_listHistory.layoutManager = LinearLayoutManager(this@GratefulHistory)

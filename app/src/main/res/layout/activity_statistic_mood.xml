@@ -171,7 +171,7 @@
     </LinearLayout>
     <com.anychart.AnyChartView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_400sdp"
+        android:layout_height="match_parent"
         android:layout_below="@id/tb_add"
         android:layout_centerHorizontal="true"
         android:visibility="visible"

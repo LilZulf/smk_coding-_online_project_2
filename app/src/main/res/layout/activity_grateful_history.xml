@@ -46,6 +46,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
+        <ImageView
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_160sdp"
+            android:src="@drawable/ic_speaker_notes_off"
+            android:backgroundTint="@color/icons"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/ivNull"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivNull"
+            android:textSize="@dimen/_15ssp"
+            android:text="Anda belum menambah data"
+            android:textColor="@color/darkest_text"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/txtNull"
+            />
     </RelativeLayout>
 
 

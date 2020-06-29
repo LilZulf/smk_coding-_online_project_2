@@ -1,10 +1,12 @@
 package com.github.lilzulf.masaya
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.github.lilzulf.masaya.Data.ServiceRequest
 import com.github.lilzulf.masaya.Object.MoodResponse
 import com.github.lilzulf.masaya.Object.MyMoodModel
@@ -61,7 +63,30 @@ class MoodActivity : AppCompatActivity() {
         })
         btDone.setOnClickListener {
             if(isChange){
-                addMoodFirebase()
+                val builder = AlertDialog.Builder(this@MoodActivity)
+
+                // Set the alert dialog title
+                builder.setTitle("Tambah ?")
+
+                // Display a message on alert dialog
+                builder.setMessage("Menambah mood hanya dapat dilakukan sekali sehari")
+
+                // Set a positive button and its click listener on alert dialog
+                builder.setPositiveButton("Iya"){dialog, which ->
+                    // Do something when user press the positive button
+                    addMoodFirebase()
+                }
+
+                // Display a neutral button on alert dialog
+                builder.setNeutralButton("Tidak"){_,_ ->
+                }
+
+                // Finally, make the alert dialog using builder
+                val dialog: AlertDialog = builder.create()
+
+                // Display the alert dialog on app interface
+                dialog.show()
+
             }else{
                 tampilToast(this,"Mohon untuk menggeser bar")
             }

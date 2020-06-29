@@ -3,35 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/_10sdp"
+    android:layout_marginVertical="@dimen/_5sdp"
     android:elevation="@dimen/_5sdp"
     android:id="@+id/rlItem"
     android:orientation="vertical"
-    android:layout_marginHorizontal="@dimen/_10sdp"
+    android:layout_marginHorizontal="@dimen/_12sdp"
     >
-    <TextView
-        android:id="@+id/txtGrateDate"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tanggal"
-        android:textSize="@dimen/_22ssp"
-        android:textColor="@color/darkest_text"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_toRightOf="@id/icon"
-        />
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/ic_date_range_black_24dp"
+            android:layout_marginTop="@dimen/_7sdp"
+            />
+        <TextView
+            android:id="@+id/txtGrateDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/icons"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/txtGrateTittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama"
         android:textStyle="bold"
-        android:textSize="@dimen/_25ssp"
+        android:textSize="@dimen/_22ssp"
         android:textColor="@color/darkest_text"
         android:layout_centerVertical="true"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_toRightOf="@id/icon"
+
         />
     <View
         android:layout_width="match_parent"

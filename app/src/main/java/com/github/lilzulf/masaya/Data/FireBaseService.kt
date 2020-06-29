@@ -47,7 +47,7 @@ class FireBaseService : FirebaseMessagingService() {
                 TAG,
                 "Message Notification Body: " + remoteMessage.notification!!.body
             )
-            sendNotification(remoteMessage.notification!!.body.toString())
+            sendNotification(remoteMessage.notification!!.body.toString(),remoteMessage.notification!!.title.toString())
         }
 
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
@@ -127,7 +127,7 @@ class FireBaseService : FirebaseMessagingService() {
      *
      * @param messageBody FCM message body received.
      */
-    private fun sendNotification(messageBody: String) {
+    private fun sendNotification(messageBody: String,tittle:String) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -137,7 +137,7 @@ class FireBaseService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle(getString(R.string.fcm_message))
+            .setContentTitle(tittle)
             .setContentText(messageBody)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)

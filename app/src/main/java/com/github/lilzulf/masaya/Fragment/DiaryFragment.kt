@@ -66,10 +66,7 @@ class DiaryFragment : Fragment() {
         ref = FirebaseDatabase.getInstance().getReference()
         llParent.visibility = View.GONE
         setGreetings()
-        val cm = context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
-        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
-        if(!isConnected){
+        if(data!!.getString("MODE").equals("OFFLINE")){
             tampilToast(context!!,"Mode Offline")
             init()
             btDate.setOnClickListener {
@@ -173,24 +170,29 @@ class DiaryFragment : Fragment() {
         val timeOfDay: Int = c.get(Calendar.HOUR_OF_DAY)
         val sdf = SimpleDateFormat("dd/M/yyyy")
         val currentDate = sdf.format(Date())
+        var username = auth!!.currentUser!!.displayName
+
+        if(username == null){
+            username = ""
+        }
 
         btDate.text = currentDate.toString()
 
         if (timeOfDay >= 0 && timeOfDay < 12) {
             Toast.makeText(activity!!, "Selamat Pagi", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat pagi, "+"\n"+getString(R.string.moring)
+            tvGreeting.text = "Selamat pagi"+username+"\n"+getString(R.string.moring)
 //            tvGreeting2.text = "Tuliskan dalam hatimu bahwa setiap hari adalah hari terbaik dalam setahun."
         } else if (timeOfDay >= 12 && timeOfDay < 16) {
             Toast.makeText(activity!!, "Selamat Siang", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat siang, "+"\n"+getString(R.string.noon)
+            tvGreeting.text = "Selamat siang, "+username+"\n"+getString(R.string.noon)
 //            tvGreeting2.text = "Jalani harimu dengan berkah dan cinta."
         } else if (timeOfDay >= 16 && timeOfDay < 21) {
             Toast.makeText(activity!!, "Selamat Sore", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat sore, "+"\n"+getString(R.string.evening)
+            tvGreeting.text = "Selamat sore, "+username+"\n"+getString(R.string.evening)
 //            tvGreeting2.text = "Ada yang tak tenggelam ketika senja datang, yakni Rasa."
         } else if (timeOfDay >= 21 && timeOfDay < 24) {
             Toast.makeText(activity!!, "Selamat malam", Toast.LENGTH_SHORT).show()
-            tvGreeting.text = "Selamat malam, "+"\n"+getString(R.string.night)
+            tvGreeting.text = "Selamat malam, "+username+"\n"+getString(R.string.night)
 //            tvGreeting2.text = "Waktunya padamkan bara setelah lelah bekerja."
         }
         //getMood(currentDate)
@@ -359,7 +361,7 @@ class DiaryFragment : Fragment() {
                 override fun onCancelled(p0: DatabaseError) {
                     //dismissLoading(swipeRefreshLayout)
                     Toast.makeText(getContext(), "Database Error yaa..." ,
-                        Toast. LENGTH_LONG ).show()
+                        Toast. LENGTH_SHORT ).show()
                 }
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val total = dataSnapshot.childrenCount.toString()

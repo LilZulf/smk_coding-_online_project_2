@@ -90,7 +90,7 @@ class AddTarget : AppCompatActivity() {
         ref .child(user_id).child( "Target" ).push().setValue(target).addOnCompleteListener {
             Toast.makeText( this , "Data Berhasil Disimpan" ,
                 Toast. LENGTH_SHORT ).show()
-            viewModel.addData(target)
+            //viewModel.addData(target)
         }
         setResult(Activity.RESULT_OK)
         finish()

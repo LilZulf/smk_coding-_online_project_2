@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:text="Belajar hal baru"
+                android:text="Lucid Dream"
                 android:textColor="@color/icons"
                 android:textStyle="bold"
                 android:layout_gravity="center"

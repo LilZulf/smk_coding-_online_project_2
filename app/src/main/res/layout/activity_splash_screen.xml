@@ -17,7 +17,6 @@
         android:textColor="@color/colorPrimary"
         android:layout_centerVertical="true"
         android:id="@+id/tvLogo"
-        android:visibility="gone"
         />
 
 </RelativeLayout>

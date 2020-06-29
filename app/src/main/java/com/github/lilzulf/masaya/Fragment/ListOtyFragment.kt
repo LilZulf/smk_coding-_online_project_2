@@ -82,23 +82,34 @@ class ListOtyFragment : Fragment(){
 
         })
 
-        rl_target.setOnClickListener {
-//            val i = Intent(activity!!,AddTarget::class.java)
-//            startActivity(i)
-            navigasiAddTarget()
+        if(data!!.getString("MODE").equals("ONLINE")){
+            rl_target.setOnClickListener {
+                navigasiAddTarget()
+            }
+            btYear.setOnClickListener {
+                rvPicker.visibility = View.VISIBLE
+                rv_listTarget.visibility = View.GONE
+                rl_target.visibility = View.GONE
+                setMinsPicker()
+            }
+            btOk.setOnClickListener {
+                rvPicker.visibility = View.GONE
+                rl_target.visibility = View.VISIBLE
+                rv_listTarget.visibility = View.VISIBLE
+                getData()
+            }
+        }else{
+            rl_target.setOnClickListener {
+               tampilToast(context!!,"Anda mode offline")
+            }
+            btYear.setOnClickListener {
+                tampilToast(context!!,"Anda mode offline")
+            }
+            btOk.setOnClickListener {
+                tampilToast(context!!,"Anda mode offline")
+            }
         }
-        btYear.setOnClickListener {
-            rvPicker.visibility = View.VISIBLE
-            rv_listTarget.visibility = View.GONE
-            rl_target.visibility = View.GONE
-            setMinsPicker()
-        }
-        btOk.setOnClickListener {
-            rvPicker.visibility = View.GONE
-            rl_target.visibility = View.VISIBLE
-            rv_listTarget.visibility = View.VISIBLE
-            getData()
-        }
+
     }
     private fun init(){
         Log.d("dataTargert2",dataTarget.toString())
@@ -189,8 +200,8 @@ class ListOtyFragment : Fragment(){
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 //dismissLoading(swipeRefreshLayout)
-                Toast.makeText(getContext(), "Database Error yaa..." ,
-                    Toast. LENGTH_LONG ).show()
+                Toast.makeText(context!!, "Database Error yaa..." ,
+                    Toast. LENGTH_SHORT ).show()
             }
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //Inisialisasi ArrayList
